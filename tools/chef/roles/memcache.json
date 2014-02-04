@@ -1,0 +1,10 @@
+{
+  "name": "memcache",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "Memcache server role",
+  "default_attributes": {},
+  "run_list": [
+    "recipe[memcached]",
+  ]
+}

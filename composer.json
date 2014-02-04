@@ -1,0 +1,24 @@
+{
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*@dev",
+        "bossa/phpspec2-expect": "*",
+        "behat/behat": "2.4.*@stable",
+        "behat/mink-goutte-driver": "1.0.*",
+        "squizlabs/php_codesniffer": "1.*",
+        "phpmd/phpmd": "1.*",
+        "sebastian/phpcpd": "2.*",
+        "pdepend/pdepend": "1.*",
+        "phploc/phploc": "2.*",
+        "theseer/phpdox": "0.6.*",
+        "theseer/fxsl": "1.0.*@dev",
+        "phpunit/phpunit": "3.7.*",
+        "covex-nn/phpcb": "1.0.*@dev"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {"psr-0": {"": "src"}}
+}

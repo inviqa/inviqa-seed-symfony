@@ -1,0 +1,15 @@
+{
+  "run_list": [
+    "role[packer]",
+    "recipe[php]",
+    "role[web-nginx]",
+    "role[db]"
+  ],
+  "nginx": {
+    "sites": {
+      "{{name}}.development.local": {
+        "docroot": "/vagrant/public"
+      }
+    }
+  }
+}

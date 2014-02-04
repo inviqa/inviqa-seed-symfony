@@ -1,0 +1,10 @@
+# eneral
+*.vagrant
+.bundle
+build/*
+tools/chef/cookbooks/*
+tools/chef/tmp/*
+
+# Composer
+vendor
+composer.phar

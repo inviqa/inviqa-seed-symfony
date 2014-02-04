@@ -1,0 +1,10 @@
+{
+  "name": "db-mysql55",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "MySQL 5.5 database",
+  "override_attributes": {},
+  "run_list": [
+    "recipe[mysql]"
+  ]
+}

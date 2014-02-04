@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+# Packer basics
+cookbook 'yum', '2.4.4'
+cookbook 'mysql'
+# cookbook 'percona'
+cookbook 'php'
+cookbook 'redisio'
+cookbook 'memcached'
+cookbook 'nginx', '2.0.8' # Latest support yum 2.x
+cookbook 'apache2'
+# cookbook 'jetty'
+# cookbook 'solr'
+
+# Other
+cookbook 'chef-varnish', :github => 'inviqa/chef-varnish'
+cookbook 'config-driven-helper', :github => 'inviqa/chef-config-driven-helper'
