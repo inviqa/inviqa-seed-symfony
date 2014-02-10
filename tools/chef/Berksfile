@@ -1,18 +1,15 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
-# Packer basics
 cookbook 'yum', '2.4.4'
 cookbook 'mysql'
-# cookbook 'percona'
 cookbook 'php'
 cookbook 'redisio'
 cookbook 'memcached'
-cookbook 'nginx', '2.0.8' # Latest support yum 2.x
+cookbook 'nginx', '2.0.8' # Latest to support yum 2.x cookbook
 cookbook 'apache2'
-# cookbook 'jetty'
-# cookbook 'solr'
-
-# Other
+cookbook 'elasticsearch'
+cookbook 'jetty', :github => 'inviqa/chef-jetty'
+cookbook 'solr', :github => 'inviqa/chef-solr'
 cookbook 'chef-varnish', :github => 'inviqa/chef-varnish'
 cookbook 'config-driven-helper', :github => 'inviqa/chef-config-driven-helper'

@@ -1,0 +1,10 @@
+{
+  "name": "solr",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "Solr server role",
+  "default_attributes": {},
+  "run_list": [
+    "recipe[solr]"
+  ]
+}

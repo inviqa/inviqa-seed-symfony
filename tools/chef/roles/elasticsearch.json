@@ -1,0 +1,18 @@
+{
+  "name": "elasticsearch",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "Elasticsearch server role",
+  "default_attributes": {
+    "elasticsearch": {
+      "cluster_name": "{{name}}",
+      "limits": {
+        "nofile": 1024,
+        "memlock": 512
+      }
+    }
+  },
+  "run_list": [
+    "recipe[elasticsearch]"
+  ]
+}

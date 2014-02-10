@@ -21,6 +21,19 @@
     "apache2": {
       "locked_version": "1.8.14"
     },
+    "elasticsearch": {
+      "locked_version": "0.3.7"
+    },
+    "jetty": {
+      "locked_version": "0.2.0",
+      "git": "git://github.com/inviqa/chef-jetty.git",
+      "ref": "967f9ecb49c359b3b2b95ee80bab5f24ee18de7a"
+    },
+    "solr": {
+      "locked_version": "1.0.0",
+      "git": "git://github.com/inviqa/chef-solr.git",
+      "ref": "d328b8de18f03ee7cf00f82b6f7a8ce0a3599b88"
+    },
     "chef-varnish": {
       "locked_version": "1.0.3",
       "git": "git://github.com/inviqa/chef-varnish.git",
@@ -69,6 +82,18 @@
     },
     "ohai": {
       "locked_version": "1.1.12"
+    },
+    "java": {
+      "locked_version": "1.19.2"
+    },
+    "monit": {
+      "locked_version": "0.7.1"
+    },
+    "ark": {
+      "locked_version": "0.4.2"
+    },
+    "iptables": {
+      "locked_version": "0.12.0"
     }
   }
 }
