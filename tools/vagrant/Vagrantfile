@@ -20,8 +20,8 @@ Vagrant.require_plugin "vagrant-berkshelf"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Box configuration
-  config.vm.box = 'CentOS-6.5-x86_64-virtualbox-stack+nginx-0.1.1'
-  config.vm.box_url = 'https://ib-vagrant-vms.s3.amazonaws.com/CentOS-6.5-x86_64-virtualbox-stack%2Bnginx-0.1.1.box'
+  config.vm.box = 'CentOS-6.5-stack+nginx-0.1.1'
+  config.vm.box_url = 'http://invi.qa/LhkAs9'
 
   # Network configuration
   config.vm.network :private_network, ip: "{{vm_ip}}"
@@ -56,12 +56,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = [ "../chef/site-cookbooks" ]
     chef.environments_path = "../chef/environments"
     chef.roles_path = "../chef/roles"
     chef.data_bags_path = "../chef/data_bags"
 
     # Please do not add additional recipes / roles / configuration for chef in the Vagrantfile
+    # If you wish to customize the VM chef config, see tools/chef/nodes/development.local.json
     chef.environment = "development"
 
     # Utilize config from tools/chef/nodes so it is all in one place
