@@ -6,7 +6,13 @@ tools/chef/cookbooks/*
 tools/chef/tmp/*
 tools/assets/*
 bin/*
+.DS_Store
 
 # Composer
 vendor
 composer.phar
+
+# Frontend
+.sass-cache/*
+*.css.map
+node_modules/*
