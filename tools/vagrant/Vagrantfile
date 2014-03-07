@@ -15,7 +15,6 @@ end
 Vagrant.require_plugin "vagrant-hostsupdater"
 Vagrant.require_plugin "vagrant-omnibus"
 Vagrant.require_plugin "vagrant-cachier"
-Vagrant.require_plugin "vagrant-berkshelf"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
@@ -37,10 +36,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # vagrant-cachier settings
   config.cache.auto_detect = true
 
-  # Berkshelf
-  config.berkshelf.enabled = true
-  config.berkshelf.berksfile_path = "../chef/Berksfile"
-
   # Shared folders
   require 'ffi'
   config.vm.synced_folder "../../", "/vagrant", :nfs => ! FFI::Platform::IS_WINDOWS
@@ -56,6 +51,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision :chef_solo do |chef|
+    # Do not add site-cookbooks to this
+    # Berkshelf will copy any site-cookbooks defined in the Berksfile
+    chef.cookbooks_path = "../chef/cookbooks"
     chef.environments_path = "../chef/environments"
     chef.roles_path = "../chef/roles"
     chef.data_bags_path = "../chef/data_bags"
