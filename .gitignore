@@ -7,6 +7,7 @@ tools/chef/tmp/*
 tools/assets/*
 bin/*
 .DS_Store
+secret.key
 
 # Composer
 vendor
