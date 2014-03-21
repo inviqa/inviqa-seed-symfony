@@ -11,5 +11,13 @@
         "docroot": "/vagrant/public"
       }
     }
+  },
+  "mysql": {
+    "users": {
+      "{{name}}": {
+        "password": "{{name}}",
+        "database_name": "{{name}}"
+      }
+    }
   }
 }

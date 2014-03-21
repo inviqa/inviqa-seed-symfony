@@ -14,7 +14,7 @@ default:
         browser: phantomjs
 #   command to open the failing html pages:
       show_cmd: echo '%s'
-      show_tmp_dir: /mnt/project/
+      show_tmp_dir: /vagrant
 
 phantomjs:
   extensions:
