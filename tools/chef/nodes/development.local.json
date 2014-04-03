@@ -3,7 +3,8 @@
     "role[packer]",
     "recipe[php]",
     "role[web-nginx]",
-    "role[db]"
+    "role[db]",
+    "recipe[config-driven-helper::packages]"
   ],
   "nginx": {
     "sites": {
