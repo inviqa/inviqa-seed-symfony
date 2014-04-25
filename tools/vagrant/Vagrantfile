@@ -1,0 +1,82 @@
+#!/usr/bin/env ruby
+# ^ Syntax hint
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.require_plugin "vagrant-hostsupdater"
+Vagrant.require_plugin "vagrant-omnibus"
+Vagrant.require_plugin "vagrant-cachier"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  # Box configuration
+  config.vm.box = 'CentOS-6.5-stack+nginx-0.1.2'
+  config.vm.box_url = 'http://invi.qa/1pBlHjM'
+
+  # Network configuration
+  config.vm.network :private_network, ip: "{{vm_ip}}"
+  config.ssh.forward_agent = true
+
+  # vagrant-hostsupdater settings
+  config.vm.hostname = "{{hostname}}"
+  # config.hostsupdater.aliases = []
+
+  # vagrant-omnibus settings
+  config.omnibus.chef_version = '11.10.4'
+
+  # vagrant-cachier settings
+  config.cache.auto_detect = true
+
+  # Shared folders
+  require 'ffi'
+  mount_options = ["dmode=777", "fmode=777"]
+  opts = if FFI::Platform::IS_WINDOWS
+    { :mount_options => mount_options }
+  else
+    { :nfs => mount_options }
+  end
+
+  config.vm.synced_folder(
+    "../../",
+    "/vagrant",
+    opts
+  )
+
+  # Virtualbox specific configuration
+  config.vm.provider :virtualbox do |vb|
+    #vb.gui = true
+    vb.customize [
+      "modifyvm", :id,
+      "--memory", "1024",
+      "--name", "{{name}}"
+    ]
+  end
+
+  config.vm.provision :chef_solo do |chef|
+    # Do not add site-cookbooks to this
+    # Berkshelf will copy any site-cookbooks defined in the Berksfile
+    chef.cookbooks_path = "../chef/cookbooks"
+    chef.environments_path = "../chef/environments"
+    chef.roles_path = "../chef/roles"
+    chef.data_bags_path = "../chef/data_bags"
+
+    # Please do not add additional recipes / roles / configuration for chef in the Vagrantfile
+    # If you wish to customize the VM chef config, see tools/chef/nodes/development.local.json
+    chef.environment = "development"
+
+    # Utilize config from tools/chef/nodes so it is all in one place
+    require 'json'
+    node_file = Pathname(__FILE__).dirname.join("..", "chef", "nodes", "development.local.json")
+    if File.exists? node_file
+      chef.json = JSON.load(node_file)
+      chef.json['run_list'].each do |recipe|
+        if recipe =~ /(.*)\[(.*)\]/
+          chef.send "add_" + $1, $2
+        else
+          chef.add_recipe recipe
+        end
+      end
+    end
+  end
+end

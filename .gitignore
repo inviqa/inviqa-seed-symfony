@@ -1,0 +1,19 @@
+# General
+*.vagrant
+.bundle
+build/*
+tools/chef/cookbooks/*
+tools/chef/tmp/*
+tools/assets/*
+bin/*
+.DS_Store
+secret.key
+
+# Composer
+vendor
+composer.phar
+
+# Frontend
+.sass-cache/*
+*.css.map
+node_modules/*

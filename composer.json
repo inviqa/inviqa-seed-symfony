@@ -1,0 +1,69 @@
+{
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/symfony": "~2.4",
+        "doctrine/orm": "dev-master",
+        "doctrine/doctrine-bundle": "~1.2",
+        "doctrine/doctrine-fixtures-bundle": "~2.2",
+        "twig/extensions": "~1.0",
+        "symfony/assetic-bundle": "~2.3",
+        "symfony/swiftmailer-bundle": "~2.3",
+        "symfony/monolog-bundle": "~2.4",
+        "sensio/distribution-bundle": "~2.3",
+        "sensio/framework-extra-bundle": "~2.3",
+        "sensio/generator-bundle": "~2.3",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "stof/doctrine-extensions-bundle" : "~1.1",
+        "sp/bower-bundle": "~0.9"
+    },
+    "require-dev": {
+        "behat/behat": "~2.5",
+        "behat/mink": "~1.5",
+        "behat/mink-extension": "~1.2",
+        "behat/symfony2-extension": "~1.1",
+        "behat/mink-sahi-driver": "dev-master",
+        "sensiolabs/behat-page-object-extension": "dev-master",
+        "behat/mink-selenium2-driver": "dev-master",
+        "fabpot/goutte": "dev-master as 1.0.*@dev",
+        "behat/mink-goutte-driver": "dev-master",
+        "phpspec/phpspec": "~2.0",
+        "bossa/phpspec2-expect": "dev-master",
+        "squizlabs/php_codesniffer": "~1.5",
+        "phpmd/phpmd": "~1.5"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload" : {
+        "psr-0" : {
+            "" : ["src/", "features/"]
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ]
+    },
+    "minimum-stability": "alpha",
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "public",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        },
+        "branch-alias": {
+            "dev-master": "2.3-dev"
+        }
+    }
+}

@@ -1,0 +1,1 @@
+Chef nodes are individual servers. If there will be many similar nodes, consider creating roles to contain common configuration.

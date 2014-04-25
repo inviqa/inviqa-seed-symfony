@@ -1,0 +1,39 @@
+{
+  "run_list": [
+    "role[packer]",
+    "recipe[php]",
+    "role[web-nginx]",
+    "role[db]",
+    "recipe[config-driven-helper::packages]",
+    "recipe[nodejs]",
+    "recipe[git]"
+  ],
+  "nodejs": {
+    "install_method": "package"
+  },
+  "nginx": {
+    "sites": {
+      "{{hostname}}": {
+        "docroot": "/vagrant/public",
+        "endpoint": "app_dev.php"
+      }
+    },
+    "fastcgi_buffers": "8 16k",
+    "fastcgi_buffer_size": "32k"
+  },
+  "mysql": {
+    "users": {
+      "{{name}}": {
+        "password": "{{name}}",
+        "database_name": "{{name}}"
+      }
+    }
+  },
+  "php": {
+    "directives": {
+      "date.timezone": "Europe/London",
+      "xdebug.max_nesting_level": "250",
+      "short_open_tag": 0
+    }
+  }
+}

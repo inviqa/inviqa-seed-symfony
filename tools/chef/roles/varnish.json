@@ -1,0 +1,29 @@
+{
+  "name": "varnish",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "Varnish HTTP cache",
+  "override_attributes": {
+    "magento": {
+      "apache": {
+        "unsecure_port": "8080"
+      }
+    },
+    "varnish": {
+      "VARNISH_BACKEND_PORT": "8080",
+      "VARNISH_LISTEN_PORT": "80"
+    },
+    "apache": {
+      "listen_ports": [8080, 443]
+    },
+    "apache-sites": {
+      "insecure_port": 8080
+    },
+    "nginx-sites": {
+      "insecure_port": 8080
+    }
+  },
+  "run_list": [
+    "recipe[chef-varnish]"
+  ]
+}

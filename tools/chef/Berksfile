@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+cookbook 'yum', '2.4.4'
+cookbook 'mysql'
+cookbook 'php'
+cookbook 'redisio'
+cookbook 'memcached'
+cookbook 'nginx', '2.0.8' # Latest to support yum 2.x cookbook
+cookbook 'nodejs'
+cookbook 'git'
+cookbook 'elasticsearch'
+cookbook 'jetty', :github => 'inviqa/chef-jetty'
+cookbook 'solr', :github => 'inviqa/chef-solr'
+cookbook 'chef-varnish', :github => 'inviqa/chef-varnish'
+cookbook 'config-driven-helper', :github => 'inviqa/chef-config-driven-helper'
+
+cookbook 'symfony-customizations', :path => './site-cookbooks/symfony'

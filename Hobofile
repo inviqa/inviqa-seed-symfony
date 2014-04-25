@@ -1,0 +1,16 @@
+after 'deps:composer' do
+  opts = { :psuedo_tty => STDIN.tty? }
+  Hobo.ui.success "Determining VM connection details..." if STDOUT.tty?
+  command_list = "  sudo rpm --import https://fedoraproject.org/static/0608B895.txt;
+                    sudo rpm -Uvh http://download-i2.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm;
+                    sudo yum install git nodejs npm --enablerepo=epel;
+                    sudo yum install npm --enablerepo=epel;
+                    sudo npm install -g bower;
+                    sudo npm install -g grunt-bower-cli;
+                    app/console sp:bower:install"
+  command = vm_command(command_list, opts)
+  puts "vm:ssh: #{command}"
+
+  Hobo.ui.success "Installing dependencies..." if STDOUT.tty?
+  exec command
+end

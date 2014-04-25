@@ -1,0 +1,8 @@
+{
+    "name": "acme-demo-bundle",
+    "dependencies": {
+        "jquery": "~2.1.0",
+        "foundation": "~5.2.1",
+        "foundation-icon-fonts": "master"
+    }
+}
