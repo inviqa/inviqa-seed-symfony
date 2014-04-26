@@ -31,6 +31,7 @@ The folder structure is as follows:
 - composer
 - nginx
 - php54
+- bower
 
 ## Differences from the old template
 
