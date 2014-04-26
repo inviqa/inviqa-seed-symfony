@@ -6,11 +6,26 @@ after 'deps:composer' do
                     sudo yum install git nodejs npm --enablerepo=epel;
                     sudo yum install npm --enablerepo=epel;
                     sudo npm install -g bower;
-                    sudo npm install -g grunt-bower-cli;
                     app/console sp:bower:install"
   command = vm_command(command_list, opts)
-  puts "vm:ssh: #{command}"
 
   Hobo.ui.success "Installing dependencies..." if STDOUT.tty?
   exec command
+end
+
+
+namespace :symfony do
+
+  desc "Refreshing Symfony cache and bower dependencies"
+  task :refresh do
+    opts = { :psuedo_tty => STDIN.tty? }
+    Hobo.ui.success "Determining VM connection details..." if STDOUT.tty?
+    command_list = "  app/console cache:clear;
+                      app/console sp:bower:install"
+    command = vm_command(command_list, opts)
+
+    Hobo.ui.success "Refreshing..." if STDOUT.tty?
+    exec command
+  end
+
 end
