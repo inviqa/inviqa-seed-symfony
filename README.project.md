@@ -41,6 +41,10 @@ hobo vm ssh    # Start an SSH session on the VM
 hobo vm mysql  # Connect to the database on the VM
 ```
 
+## Front-end dependencies with Bower
+
+You can use the SpBowerBundle to handle your front-end dependecies. Please refer to the [documentation](https://github.com/Spea/SpBowerBundle/blob/master/Resources/doc/index.md#step-3-configure-the-spbowerbundle) about how to use it.
+
 ## Common Issues
 
 As setup issues are encountered please detail with step by step fix instructions, and where possible update the project itself to provide a more permanent fix.
