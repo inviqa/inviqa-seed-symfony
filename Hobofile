@@ -7,7 +7,7 @@ after 'deps:composer' do
                     sudo yum install npm --enablerepo=epel;
                     sudo npm --registry http://registry.npmjs.eu/ install -g bower;
                     app/console sp:bower:install;
-                    app/console assets:install public"
+                    app/console assets:install --symlink public"
   command = vm_command(command_list, opts)
 
   Hobo.ui.success "Installing dependencies..." if STDOUT.tty?
@@ -24,7 +24,7 @@ namespace :symfony do
     Hobo.ui.success "Determining VM connection details..." if STDOUT.tty?
     command_list = "  app/console cache:clear;
                       app/console sp:bower:install;
-                      app/console assets:install public"
+                      app/console assets:install --symlink public"
     command = vm_command(command_list, opts)
 
     Hobo.ui.success "Refreshing..." if STDOUT.tty?
