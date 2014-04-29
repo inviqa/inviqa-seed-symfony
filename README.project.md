@@ -79,17 +79,6 @@ As setup issues are encountered please detail with step by step fix instructions
  - **Ruby stacktrace mentioning 'hostsupdater' during 'hobo vm up'**
    Please remove any {{hostname}} entries from your hosts file and retry
 
- - **I got 'npm ERR! registry error parsing json' message during the VM building**
-   Sometimes the default npm registry can't be reached. In this case you have to log into your VM and install bower from a different place:
-   ```bash
-   hobo vm ssh
-   sudo npm --registry http://registry.npmjs.eu/ install -g bower
-   ```
-   Now log out from VM (Ctrl+D) and then:
-   ```bash
-   hobo symfony refresh
-   ```
-
 # License
 
 Copyright 2014, Inviqa

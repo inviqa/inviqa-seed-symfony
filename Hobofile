@@ -5,9 +5,9 @@ after 'deps:composer' do
                     sudo rpm -Uvh http://download-i2.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm;
                     sudo yum install git nodejs npm --enablerepo=epel;
                     sudo yum install npm --enablerepo=epel;
-                    sudo npm install -g bower;
+                    sudo npm --registry http://registry.npmjs.eu/ install -g bower;
                     app/console sp:bower:install;
-                    app/console assets:install --symlink public"
+                    app/console assets:install public"
   command = vm_command(command_list, opts)
 
   Hobo.ui.success "Installing dependencies..." if STDOUT.tty?
@@ -24,7 +24,7 @@ namespace :symfony do
     Hobo.ui.success "Determining VM connection details..." if STDOUT.tty?
     command_list = "  app/console cache:clear;
                       app/console sp:bower:install;
-                      app/console assets:install --symlink public"
+                      app/console assets:install public"
     command = vm_command(command_list, opts)
 
     Hobo.ui.success "Refreshing..." if STDOUT.tty?
