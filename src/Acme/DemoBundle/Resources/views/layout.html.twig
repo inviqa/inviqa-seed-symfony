@@ -34,13 +34,4 @@
             <div class="symfony-content">{{ code|raw }}</div>
         </div>
     {% endif %}
-
-    {% block javascripts %}
-    {% javascripts
-        "@jquery_js"
-        "@foundation_js" %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    {% endblock %}
-
 {% endblock %}

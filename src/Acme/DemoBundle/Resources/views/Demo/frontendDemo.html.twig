@@ -1,0 +1,32 @@
+{% extends "AcmeDemoBundle::frontendLayout.html.twig" %}
+
+{% block content %}
+    <style>
+        ul { list-style-type: none; }
+        .icon { position: relative; top: 5px; }
+        .size-12 { font-size: 12pt; }
+        .size-14 { font-size: 14pt; }
+        .size-16 { font-size: 16pt; }
+        .size-18 { font-size: 18pt; }
+        .size-21 { font-size: 21pt; }
+        .size-24 { font-size: 24pt; }
+        .size-36 { font-size: 36pt; }
+        .size-48 { font-size: 48pt; }
+        .size-60 { font-size: 60pt; }
+        .size-72 { font-size: 72pt; }
+    </style>
+    <div class="row">
+        <div class="large-12 columns">
+            <h1>Hello handsome!</h1>
+            <hr>
+            <p>Now you're using <a href="http://jquery.com">jQuery</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>, both included by <a href="bower.io">bower</a>. Whoohoo!</p>
+            <h3>Here are some advantages of <b>Foundation</b>...</h3>
+            <ul>
+                <li><i class="fi-checkbox size-24 icon"></i> you can use a <a href="http://zurb.com/playground/foundation-icons">lot of icons</a> without images</li>
+                <li><i class="fi-checkbox size-24 icon"></i> it's clean and well organized, you can save a lot of time <i class="fi-clock size-24 icon"></i> <i class="fi-arrow-right size-24 icon"></i> <i class="fi-pound size-24 icon"></i></li>
+                <li><i class="fi-checkbox size-24 icon"></i> its code is valid HTML<i class="fi-html5 size-24 icon"></i></li>
+                <li><i class="fi-checkbox size-24 icon"></i> responsive, you can use it on <i class="fi-monitor size-24 icon"></i>, <i class="fi-tablet-landscape size-24 icon"></i> or <i class="fi-mobile size-24 icon"></i></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

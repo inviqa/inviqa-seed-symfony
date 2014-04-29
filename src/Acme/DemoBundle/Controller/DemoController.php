@@ -31,6 +31,15 @@ class DemoController extends Controller
     }
 
     /**
+     * @Route("/frontend", name="_demo_frontend")
+     * @Template()
+     */
+    public function frontendDemoAction()
+    {
+        return array();
+    }
+
+    /**
      * @Route("/contact", name="_demo_contact")
      * @Template()
      */

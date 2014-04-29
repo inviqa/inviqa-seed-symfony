@@ -6,7 +6,8 @@ after 'deps:composer' do
                     sudo yum install git nodejs npm --enablerepo=epel;
                     sudo yum install npm --enablerepo=epel;
                     sudo npm install -g bower;
-                    app/console sp:bower:install"
+                    app/console sp:bower:install;
+                    app/console assets:install --symlink public"
   command = vm_command(command_list, opts)
 
   Hobo.ui.success "Installing dependencies..." if STDOUT.tty?
@@ -14,6 +15,7 @@ after 'deps:composer' do
 end
 
 
+desc "Symfony related tasks"
 namespace :symfony do
 
   desc "Refreshing Symfony cache and bower dependencies"
@@ -21,7 +23,8 @@ namespace :symfony do
     opts = { :psuedo_tty => STDIN.tty? }
     Hobo.ui.success "Determining VM connection details..." if STDOUT.tty?
     command_list = "  app/console cache:clear;
-                      app/console sp:bower:install"
+                      app/console sp:bower:install;
+                      app/console assets:install --symlink public"
     command = vm_command(command_list, opts)
 
     Hobo.ui.success "Refreshing..." if STDOUT.tty?

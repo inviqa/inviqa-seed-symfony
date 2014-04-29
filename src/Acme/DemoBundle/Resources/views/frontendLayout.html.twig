@@ -1,0 +1,63 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+    {% stylesheets
+        "@foundation_css"
+        "@foundation_icon_fonts_css"
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% include "::foundation-font.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for flashMessage in messages %}
+            <div class="flash-{{ type }} flash-message">
+                <em>{{ type }}</em>: {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {% block content %}{% endblock %}
+
+    <footer class="row">
+        <div class="large-12 columns">
+        {% block footer %}
+            <hr />
+            <div class="row">
+                <div class="large-6 columns">
+                    <p>&copy; Copyright no one at all. Go to town.</p>
+                </div>
+                <div class="large-6 columns">
+                    <ul class="inline-list right">
+                        <li><a href="#">Link 1</a></li>
+                        <li><a href="#">Link 2</a></li>
+                        <li><a href="#">Link 3</a></li>
+                        <li><a href="#">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        {% endblock %}
+        </div>
+    </footer>
+
+{% endblock %}
+
+{% block javascripts %}
+{% javascripts
+    "@jquery_js"
+    "@foundation_js" %}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<script>
+    (function($) {
+        $(document).ready(function() {
+            $('a[href="http://jquery.com"').after(' (' + $.fn.jquery + ')');
+        });
+    })(jQuery);
+</script>
+{% endblock %}
+
