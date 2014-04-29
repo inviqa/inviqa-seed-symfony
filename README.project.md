@@ -85,6 +85,10 @@ As setup issues are encountered please detail with step by step fix instructions
    hobo vm ssh
    sudo npm --registry http://registry.npmjs.eu/ install -g bower
    ```
+   Now log out from VM (Ctrl+D) and then:
+   ```bash
+   hobo symfony refresh
+   ```
 
 # License
 
