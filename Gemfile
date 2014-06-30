@@ -11,3 +11,6 @@ gem "railsless-deploy", "~> 1.1.2"
 
 # Execution helpers
 gem 'rubygems-bundler', '~> 1.4.3'
+
+# CI / testing
+gem 'serverspec', '~> 1.9.0'
