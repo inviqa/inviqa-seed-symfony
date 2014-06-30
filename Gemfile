@@ -9,8 +9,5 @@ gem "knife-solo_data_bag", "~> 0.4"
 gem "capistrano", "~> 2.15.5"
 gem "railsless-deploy", "~> 1.1.2"
 
-# Vagrant 1.1+ support
-gem "vagrant-wrapper", "~> 1.2"
-
 # Execution helpers
 gem 'rubygems-bundler', '~> 1.4.3'

@@ -188,7 +188,6 @@ GEM
     timers (2.0.0)
       hitimes
     uuidtools (2.1.4)
-    vagrant-wrapper (1.2.1.1)
     varia_model (0.3.2)
       buff-extensions (~> 0.2)
       hashie (>= 2.0.2)
@@ -214,4 +213,3 @@ DEPENDENCIES
   knife-solo_data_bag (~> 0.4)
   railsless-deploy (~> 1.1.2)
   rubygems-bundler (~> 1.4.3)
-  vagrant-wrapper (~> 1.2)
