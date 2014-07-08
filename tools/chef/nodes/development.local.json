@@ -14,7 +14,7 @@
   "nginx": {
     "sites": {
       "{{hostname}}": {
-        "docroot": "/vagrant/public",
+        "docroot": "/vagrant/web",
         "endpoint": "app_dev.php"
       }
     },
