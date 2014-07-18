@@ -3,6 +3,25 @@
   "description": "",
   "json_class": "Chef::Environment",
   "chef_type": "environment",
-  "default_attributes": {},
+
+  "default_attributes": {
+    "nginx": {
+      "sites": {
+        "{{hostname}}": {
+          "docroot": "/vagrant/public"
+        }
+      }
+    },
+
+    "mysql": {
+      "users": {
+        "{{name}}": {
+          "password": "{{name}}",
+          "database_name": "{{name}}"
+        }
+      }
+    }
+  },
+
   "override_attributes": {}
 }

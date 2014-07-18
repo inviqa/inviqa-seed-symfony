@@ -5,20 +5,5 @@
     "role[web-nginx]",
     "role[db]",
     "recipe[config-driven-helper::packages]"
-  ],
-  "nginx": {
-    "sites": {
-      "{{hostname}}": {
-        "docroot": "/vagrant/public"
-      }
-    }
-  },
-  "mysql": {
-    "users": {
-      "{{name}}": {
-        "password": "{{name}}",
-        "database_name": "{{name}}"
-      }
-    }
-  }
+  ]
 }
