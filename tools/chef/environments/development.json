@@ -23,5 +23,11 @@
     }
   },
 
-  "override_attributes": {}
+  "override_attributes": {
+    "data-bag-merge": {
+      "environments": {
+        "encrypted": false
+      }
+    }
+  }
 }

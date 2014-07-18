@@ -1,5 +1,6 @@
 {
   "run_list": [
+    "recipe[data-bag-merge::environment]",
     "role[packer]",
     "recipe[php]",
     "role[web-nginx]",

@@ -35,10 +35,7 @@
           "mysql55-libs",
           "mysql55-server"
         ]
-      },
-      "server_root_password": "984C42CF342f7j6",
-      "server_repl_password": "984C42CF342f7j6",
-      "server_debian_password": "984C42CF342f7j6"
+      }
     }
   },
   "runlist": [
