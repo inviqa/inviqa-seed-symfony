@@ -1,15 +1,16 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
-cookbook 'yum', '2.4.4'
-cookbook 'mysql'
-cookbook 'php'
-cookbook 'redisio'
-cookbook 'memcached'
+cookbook 'yum', '~> 2.4.4'
+cookbook 'mysql', '~> 4.0.20'
+cookbook 'php', '~> 1.3.12'
+cookbook 'redisio', '~> 1.7.1'
+cookbook 'memcached', '~> 1.7.2'
 cookbook 'nginx', '2.0.8' # Latest to support yum 2.x cookbook
-cookbook 'apache2'
-cookbook 'elasticsearch'
-cookbook 'jetty', :github => 'inviqa/chef-jetty'
-cookbook 'solr', :github => 'inviqa/chef-solr'
-cookbook 'chef-varnish', :github => 'inviqa/chef-varnish'
-cookbook 'config-driven-helper', :github => 'inviqa/chef-config-driven-helper'
+cookbook 'apache2', '~> 1.8.14'
+cookbook 'elasticsearch', '~> 0.3.7'
+cookbook 'jetty', :github => 'inviqa/chef-jetty', :tag => '0.2'
+cookbook 'solr', :github => 'inviqa/chef-solr', :tag => '1.0.1'
+cookbook 'chef-varnish', :github => 'inviqa/chef-varnish', :ref => '1.0.5'
+cookbook 'config-driven-helper', :github => 'inviqa/chef-config-driven-helper', :ref => '1.0.5'
+cookbook 'data-bag-merge', '~> 0.1.3'
