@@ -27,18 +27,20 @@
       "client": {
         "packages": [
           "mysql55",
-          "mysql55-devel"
+          "mysql55-devel",
+          "mysqlclient16"
         ]
       },
       "server": {
         "packages": [
           "mysql55-libs",
+          "mysqlclient16",
           "mysql55-server"
         ]
       }
     }
   },
-  "runlist": [
+  "run_list": [
     "yum::ius",
     "yum::epel"
   ]
