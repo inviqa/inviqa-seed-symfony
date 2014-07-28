@@ -7,6 +7,12 @@
     "nginx": {
       "default_site_enabled": false
     },
+    "php-fpm": {
+      "user": "nginx",
+      "group": "nginx",
+      "package_name": "php54-fpm",
+      "service_name": "php-fpm"
+    },
     "services": {
       "nginx": ["enable", "start"],
       "php-fpm": ["enable", "start"]
@@ -14,6 +20,7 @@
   },
   "run_list": [
     "recipe[nginx]",
+    "recipe[php-fpm]",
     "recipe[config-driven-helper::services]",
     "recipe[config-driven-helper::nginx-sites]"
   ]

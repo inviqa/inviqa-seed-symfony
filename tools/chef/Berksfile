@@ -8,6 +8,7 @@ cookbook 'redisio', '~> 1.7.1'
 cookbook 'memcached', '~> 1.7.2'
 cookbook 'nginx', '2.0.8' # Latest to support yum 2.x cookbook
 cookbook 'apache2', '~> 1.8.14'
+cookbook 'php-fpm', '~> 0.6.7'
 cookbook 'elasticsearch', '~> 0.3.7'
 cookbook 'jetty', :github => 'inviqa/chef-jetty', :tag => '0.2'
 cookbook 'solr', :github => 'inviqa/chef-solr', :tag => '1.0.1'

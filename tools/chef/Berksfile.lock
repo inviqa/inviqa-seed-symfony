@@ -21,6 +21,9 @@
     "apache2": {
       "locked_version": "1.8.14"
     },
+    "php-fpm": {
+      "locked_version": "0.6.10"
+    },
     "elasticsearch": {
       "locked_version": "0.3.7"
     },
