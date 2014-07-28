@@ -6,6 +6,22 @@
   "default_attributes": {
     "services": {
       "mysqld": ["enable", "start"]
+    },
+    "mysql": {
+      "client": {
+        "packages": [
+          "mysql55",
+          "mysql55-devel",
+          "mysqlclient16"
+        ]
+      },
+      "server": {
+        "packages": [
+          "mysql55-libs",
+          "mysqlclient16",
+          "mysql55-server"
+        ]
+      }
     }
   },
   "run_list": [

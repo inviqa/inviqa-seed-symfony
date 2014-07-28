@@ -1,8 +1,8 @@
 {
-  "name": "packer",
+  "name": "php54",
   "chef_type": "role",
   "json_class": "Chef::Role",
-  "description": "Base role to sync with Packer template",
+  "description": "PHP5.4 role",
   "override_attributes": {
     "php": {
       "packages": [
@@ -22,26 +22,9 @@
         "php54-xml",
         "php54-xmlrpc"
       ]
-    },
-    "mysql": {
-      "client": {
-        "packages": [
-          "mysql55",
-          "mysql55-devel",
-          "mysqlclient16"
-        ]
-      },
-      "server": {
-        "packages": [
-          "mysql55-libs",
-          "mysqlclient16",
-          "mysql55-server"
-        ]
-      }
     }
   },
   "run_list": [
-    "yum::ius",
-    "yum::epel"
+    "php"
   ]
 }
