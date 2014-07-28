@@ -6,19 +6,21 @@
   "default_attributes": {
     "services": {
       "mysqld": ["enable", "start"]
-    },
+    }
+  },
+  "override_attributes": {
     "mysql": {
       "client": {
         "packages": [
           "mysql55",
-          "mysql55-devel",
-          "mysqlclient16"
+          "mysql55-devel"
         ]
       },
       "server": {
         "packages": [
+          "mysql55",
           "mysql55-libs",
-          "mysqlclient16",
+          "mysql55-devel",
           "mysql55-server"
         ]
       }
