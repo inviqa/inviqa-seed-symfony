@@ -4,5 +4,9 @@
     "server_root_password": "984C42CF342f7j6",
     "server_repl_password": "984C42CF342f7j6",
     "server_debian_password": "984C42CF342f7j6"
+  },
+  "ssl_certs": {
+    "/etc/ssl/cert.pem": "{{chef_ssl.cert}}",
+    "/etc/ssl/key.pem": "{{chef_ssl.key}}"
   }
 }
