@@ -8,7 +8,9 @@
     "nginx": {
       "sites": {
         "{{hostname}}": {
-          "docroot": "/vagrant/public"
+          "server_name": "{{hostname}}",
+          "docroot": "/vagrant/public",
+          "protocols": ["http", "https"]
         }
       }
     },
