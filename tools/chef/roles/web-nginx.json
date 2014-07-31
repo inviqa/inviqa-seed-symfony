@@ -21,6 +21,7 @@
   "run_list": [
     "recipe[nginx]",
     "recipe[php-fpm]",
+    "recipe[project::nginx-https-map]",
     "recipe[config-driven-helper::services]",
     "recipe[config-driven-helper::nginx-sites]"
   ]
