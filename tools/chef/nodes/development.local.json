@@ -15,7 +15,11 @@
     "sites": {
       "{{hostname}}": {
         "docroot": "/vagrant/public",
-        "endpoint": "app_dev.php"
+        "endpoint": "app_dev.php",
+        "php-fpm": {
+          "host": "127.0.0.1",
+          "port": "9000"
+        }
       }
     },
     "fastcgi_buffers": "8 16k",
