@@ -1,14 +1,16 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
-cookbook 'yum', '2.4.4'
+cookbook 'yum', '2.4.4' 
+cookbook 'runit', '<= 1.4.0' # Latest to support yum 2.x cookbookv
 cookbook 'mysql'
-cookbook 'php'
+cookbook 'php', '<= 1.3.0' # Latest to support yum 2.x cookbook
+# cookbook 'php-fpm', '<= 0.6.8' # Latest to support yum 2.x cookbook
 cookbook 'redisio'
-cookbook 'memcached'
+cookbook 'memcached', '<= 1.6.6' # Latest to support yum 2.x cookbook
 cookbook 'nginx', '2.0.8' # Latest to support yum 2.x cookbook
-cookbook 'nodejs'
-cookbook 'git'
+cookbook 'nodejs', '<= 1.1.2' # Latest to support yum 2.x cookbook
+cookbook 'git', '<= 2.8.4' # Latest to support yum 2.x cookbook
 cookbook 'elasticsearch'
 cookbook 'jetty', :github => 'inviqa/chef-jetty'
 cookbook 'solr', :github => 'inviqa/chef-solr'
