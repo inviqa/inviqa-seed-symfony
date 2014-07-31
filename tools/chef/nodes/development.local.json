@@ -1,8 +1,8 @@
 {
   "run_list": [
     "recipe[data-bag-merge::environment]",
-    "recipe[yum::epel]",
-    "recipe[yum::ius]",
+    "recipe[yum-epel]",
+    "recipe[yum-ius]",
     "role[php54]",
     "role[web-nginx]",
     "role[db-mysql55]",
