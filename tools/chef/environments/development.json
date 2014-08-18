@@ -22,7 +22,9 @@
           "database_name": "{{name}}"
         }
       }
-    }
+    },
+
+    "packages": [ "git" ]
   },
 
   "override_attributes": {
