@@ -1,6 +1,6 @@
 https_map = "
     map $scheme $https {
-        default off;
+        default \"\";
         https on;
     }
 "
