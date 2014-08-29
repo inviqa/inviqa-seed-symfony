@@ -71,7 +71,7 @@
     <exec executable="bin/phploc">
       <arg value="--log-csv" />
       <arg value="${basedir}/build/logs/phploc.csv" />
-      <arg path="${basedir}/${srcdir}" />
+      <arg path="${srcDir}" />
     </exec>
   </target>
 
@@ -80,7 +80,7 @@
       <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
       <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
       <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
-      <arg path="${basedir}/${srcdir}" />
+      <arg path="${srcDir}" />
     </exec>
   </target>
 
