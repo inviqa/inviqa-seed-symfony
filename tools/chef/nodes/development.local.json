@@ -3,7 +3,7 @@
     "recipe[data-bag-merge::environment]",
     "recipe[yum-epel]",
     "recipe[yum-ius]",
-    "role[php54]",
+    "role[php54-development]",
     "role[web-nginx]",
     "role[db-mysql55]",
     "recipe[config-driven-helper::packages]"

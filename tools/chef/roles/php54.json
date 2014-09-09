@@ -17,7 +17,6 @@
         "php54-pecl-imagick",
         "php54-pecl-memcache",
         "php54-pecl-redis",
-        "php54-pecl-xdebug",
         "php54-soap",
         "php54-xml",
         "php54-xmlrpc"
