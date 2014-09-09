@@ -24,6 +24,8 @@
     }
   },
   "run_list": [
+    "yum-epel",
+    "yum-ius",
     "php"
   ]
 }
