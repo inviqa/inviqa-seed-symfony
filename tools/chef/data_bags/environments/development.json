@@ -11,7 +11,7 @@
     }
   },
   "ssl_certs": {
-    "/etc/ssl/cert.pem": "{{chef_ssl.cert}}",
-    "/etc/ssl/key.pem": "{{chef_ssl.key}}"
+    "/etc/pki/tls/certs/cert.pem": "{{chef_ssl.cert}}",
+    "/etc/pki/tls/private/key.pem": "{{chef_ssl.key}}"
   }
 }
