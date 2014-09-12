@@ -26,9 +26,9 @@ DEPENDENCIES
     git: git://github.com/inviqa/chef-solr.git
     revision: da9112f7b6f330e9d04467b186228f3f38f1cfe9
     tag: 1.0.1
-  yum (~> 3.1.2)
-  yum-epel (~> 0.3.6)
-  yum-ius (~> 0.2.0)
+  yum (~> 3.3.2)
+  yum-epel (~> 0.5.1)
+  yum-ius (~> 0.3.0)
 
 GRAPH
   7-zip (1.0.2)
@@ -118,9 +118,9 @@ GRAPH
   xml (1.2.6)
     build-essential (>= 0.0.0)
     chef-sugar (>= 0.0.0)
-  yum (3.1.6)
-  yum-epel (0.3.6)
+  yum (3.3.2)
+  yum-epel (0.5.1)
     yum (~> 3.0)
-  yum-ius (0.2.0)
+  yum-ius (0.3.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)

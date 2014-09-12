@@ -25,7 +25,6 @@
     }
   },
   "run_list": [
-    "yum-epel",
     "yum-ius",
     "recipe[mysql::server]",
     "recipe[mysql::client]",
