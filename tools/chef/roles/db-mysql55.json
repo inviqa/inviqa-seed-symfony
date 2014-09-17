@@ -5,7 +5,7 @@
   "description": "MySQL 5.5 database",
   "default_attributes": {
     "services": {
-      "mysqld": ["enable", "start"]
+      "mysql": ["enable", "start"]
     }
   },
   "override_attributes": {
