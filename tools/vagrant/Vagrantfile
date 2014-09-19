@@ -35,8 +35,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     overrides.ssh.forward_agent = true
 
     # Box configuration
-    overrides.vm.box = 'CentOS-6.5-stack+nginx-0.1.2'
-    overrides.vm.box_url = 'http://invi.qa/1pBlHjM'
+    overrides.vm.box = 'CentOS-6.5-stack+nginx-0.1.4'
+    overrides.vm.box_url = 'http://invi.qa/1u6IVW7'
 
     # Shared folders
     mount_options = ["dmode=777", "fmode=777"]
