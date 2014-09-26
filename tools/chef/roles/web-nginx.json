@@ -8,10 +8,24 @@
       "default_site_enabled": false
     },
     "php-fpm": {
-      "user": "nginx",
-      "group": "nginx",
       "package_name": "php54-fpm",
-      "service_name": "php-fpm"
+      "service_name": "php-fpm",
+      "pools": {
+        "www": {
+          "enable": true,
+          "listen_owner": "nginx",
+          "listen_group": "nginx",
+          "max_children": "50",
+          "start_servers": "5",
+          "min_spare_servers": "5",
+          "max_spare_servers": "35",
+          "php_options": {
+            "php_value[error_log]": "/var/log/php-fpm/www-error.log",
+            "php_value[session.save_path]": "/var/lib/php/session",
+            "php_flag[log_errors]": "on"
+          }
+        }
+      }
     },
     "services": {
       "nginx": ["enable", "start"],
