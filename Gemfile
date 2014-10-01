@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Chef
-gem "berkshelf", "~> 2.0.18"
+gem "berkshelf", "~> 3.1.4"
 gem "knife-solo", "~> 0.4"
 gem "knife-solo_data_bag", "~> 1.1.0"
 

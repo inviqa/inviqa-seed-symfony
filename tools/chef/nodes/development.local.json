@@ -1,24 +1,11 @@
 {
   "run_list": [
-    "role[packer]",
-    "recipe[php]",
+    "recipe[data-bag-merge::environment]",
+    "recipe[yum-epel]",
+    "recipe[yum-ius]",
+    "role[db-mysql55]",
+    "role[php54-development]",
     "role[web-nginx]",
-    "role[db]",
     "recipe[config-driven-helper::packages]"
-  ],
-  "nginx": {
-    "sites": {
-      "{{hostname}}": {
-        "docroot": "/vagrant/public"
-      }
-    }
-  },
-  "mysql": {
-    "users": {
-      "{{name}}": {
-        "password": "{{name}}",
-        "database_name": "{{name}}"
-      }
-    }
-  }
+  ]
 }
