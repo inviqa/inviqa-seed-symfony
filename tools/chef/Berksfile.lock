@@ -6,7 +6,7 @@ DEPENDENCIES
     ref: 1.0.5
   config-driven-helper
     git: git://github.com/inviqa/chef-config-driven-helper.git
-    revision: 608bc412a4190d18a3363fce3f122f4295e644df
+    revision: f92be8884aded673d0d6c788773af117a3899447
     ref: 1.3.0
   data-bag-merge (~> 0.1.3)
   elasticsearch (~> 0.3.7)
@@ -50,7 +50,7 @@ GRAPH
     apt (>= 0.0.0)
     yum (>= 0.0.0)
   chef_handler (1.1.6)
-  config-driven-helper (1.2.0)
+  config-driven-helper (1.3.0)
     apache2 (>= 0.0.0)
     build-essential (>= 0.0.0)
     database (>= 0.0.0)
