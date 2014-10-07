@@ -16,3 +16,6 @@ end
 
 # CI / testing
 gem 'serverspec', '~> 1.9.0'
+
+# Tools
+gem "compass", "~> 0.12.2"
