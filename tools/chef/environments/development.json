@@ -10,7 +10,7 @@
         "{{name}}": {
           "inherits": "my-app",
           "server_name": "{{hostname}}",
-          "docroot": "/vagrant/public",
+          "docroot": "/vagrant/web",
           "capistrano": false
         }
       }
