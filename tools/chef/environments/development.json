@@ -10,6 +10,7 @@
         "{{hostname}}": {
           "server_name": "{{hostname}}",
           "docroot": "/vagrant/web",
+          "endpoint": "app_dev.php",
           "protocols": ["http", "https"]
         }
       }
