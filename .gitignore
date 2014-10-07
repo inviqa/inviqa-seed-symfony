@@ -17,3 +17,12 @@ composer.phar
 .sass-cache/*
 *.css.map
 node_modules/*
+
+# SF2
+/web/bundles/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/config/parameters.yml
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
