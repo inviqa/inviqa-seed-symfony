@@ -9,7 +9,7 @@
       "sites": {
         "{{hostname}}": {
           "server_name": "{{hostname}}",
-          "docroot": "/vagrant/public",
+          "docroot": "/vagrant/web",
           "protocols": ["http", "https"]
         }
       }
