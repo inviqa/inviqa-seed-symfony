@@ -3,9 +3,9 @@
         "php": ">=5.4.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*@dev",
+        "phpspec/phpspec": "~2.0",
         "bossa/phpspec2-expect": "*",
-        "behat/behat": "3.0.*@stable",
+        "behat/behat": "~3.0",
         "behat/mink-extension": "2.*",
         "behat/mink-goutte-driver": "1.0.*",
         "behat/mink-selenium2-driver": "1.1.*",
