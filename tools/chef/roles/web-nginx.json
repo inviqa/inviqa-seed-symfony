@@ -8,7 +8,7 @@
       "default_site_enabled": false
     },
     "php-fpm": {
-      "package_name": "php54-fpm",
+      "package_name": "php56w-fpm",
       "service_name": "php-fpm",
       "listen_owner": "nginx",
       "listen_group": "nginx",
