@@ -4,6 +4,9 @@
   "json_class": "Chef::Role",
   "description": "PHP5.5 role",
   "override_attributes": {
+    "php-fpm": {
+      "package_name": "php55w-fpm"
+    },
     "php": {
       "packages": [
         "php55w",
