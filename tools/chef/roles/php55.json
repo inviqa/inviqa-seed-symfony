@@ -1,5 +1,5 @@
 {
-  "name": "php54",
+  "name": "php55",
   "chef_type": "role",
   "json_class": "Chef::Role",
   "description": "PHP5.5 role",
