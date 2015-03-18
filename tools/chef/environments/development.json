@@ -25,7 +25,11 @@
       }
     },
 
-    "packages": [ "git" ]
+    "packages": [ "git" ],
+
+    "iptables-standard": {
+      "allowed_incoming_ports": {"mysql": "mysql"}
+    }
   },
 
   "override_attributes": {
