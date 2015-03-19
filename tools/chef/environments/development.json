@@ -23,7 +23,8 @@
           "database_name": "{{name}}"
         }
       },
-      "allow_remote_root": true
+      "allow_remote_root": true,
+      "bind_address": "0.0.0.0"
     },
 
     "packages": [ "git" ],
