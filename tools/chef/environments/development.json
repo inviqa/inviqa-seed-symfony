@@ -22,7 +22,8 @@
           "password": "{{name}}",
           "database_name": "{{name}}"
         }
-      }
+      },
+      "allow_remote_root": true
     },
 
     "packages": [ "git" ],
