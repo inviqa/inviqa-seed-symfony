@@ -22,10 +22,16 @@
           "password": "{{name}}",
           "database_name": "{{name}}"
         }
-      }
+      },
+      "allow_remote_root": true,
+      "bind_address": "0.0.0.0"
     },
 
-    "packages": [ "git" ]
+    "packages": [ "git" ],
+
+    "iptables-standard": {
+      "allowed_incoming_ports": {"mysql": "mysql"}
+    }
   },
 
   "override_attributes": {
