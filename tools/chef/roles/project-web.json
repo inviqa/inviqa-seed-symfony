@@ -8,6 +8,7 @@
     "recipe[config-driven-helper::iptables-standard]",
     "recipe[yum-epel]",
     "recipe[yum-ius]",
+    "recipe[config-driven-helper::capistrano]",
     "role[db-mysql55]",
     "role[php56]",
     "role[web-nginx]",
@@ -22,9 +23,25 @@
       }
     },
     "nginx": {
-      "sites": {
-        "{{name}}": {
-          "protocols": ["http", "https"]
+      "shared_config": {
+        "my-app": {
+          "protocols": ["http", "https"],
+          "capistrano": {
+            "owner": "deploy",
+            "group": "deploy",
+            "shared_folders": {
+              "readable": {
+                "folders": [
+                ]
+              },
+              "writeable": {
+                "owner": "apache",
+                "group": "apache",
+                "folders": [
+                ]
+              }
+            }
+          }
         }
       }
     },
