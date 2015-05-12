@@ -7,5 +7,6 @@
     "role[php56-development]",
     "role[web-nginx]",
     "recipe[config-driven-helper::packages]"
-  ]
+  ],
+  "environment": "development"
 }

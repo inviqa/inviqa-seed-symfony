@@ -63,7 +63,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Please do not add additional recipes / roles / configuration for chef in the Vagrantfile
     # If you wish to customize the VM chef config, see tools/chef/nodes/development.local.json
-    chef.environment = "development"
 
     # Utilize config from tools/chef/nodes so it is all in one place
     require 'json'
@@ -76,6 +75,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         else
           chef.add_recipe recipe
         end
+      end
+
+      chef.environment = chef.json['environment'] if chef.json['environment']
+
+      unless chef.environment == 'development'
+        chef.encrypted_data_bag_secret_key_path = "../chef/encrypted_data_bag_secret"
       end
     end
   end
