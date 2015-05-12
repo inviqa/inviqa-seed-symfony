@@ -1,12 +1,7 @@
 {
   "run_list": [
-    "recipe[data-bag-merge::environment]",
-    "recipe[yum-epel]",
-    "recipe[yum-ius]",
-    "role[db-mysql55]",
-    "role[php56-development]",
-    "role[web-nginx]",
-    "recipe[config-driven-helper::packages]"
+    "role[project-web]",
+    "role[php56-development]"
   ],
   "environment": "development"
 }
