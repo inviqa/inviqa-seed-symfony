@@ -9,21 +9,10 @@
       "sites": {
         "{{name}}": {
           "server_name": "{{hostname}}",
-          "docroot": "/vagrant/public",
-          "protocols": ["http", "https"]
+          "docroot": "/vagrant/public"
         }
       }
-    },
-
-    "mysql": {
-      "users": {
-        "{{name}}": {
-          "database_name": "{{name}}"
-        }
-      }
-    },
-
-    "packages": [ "git" ]
+    }
   },
 
   "override_attributes": {

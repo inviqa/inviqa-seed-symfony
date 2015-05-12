@@ -11,5 +11,22 @@
     "role[php56]",
     "role[web-nginx]",
     "recipe[config-driven-helper::packages]"
-  ]
+  ],
+  "default_attributes": {
+    "mysql": {
+      "users": {
+        "{{name}}": {
+          "database_name": "{{name}}"
+        }
+      }
+    },
+    "nginx": {
+      "sites": {
+        "{{name}}": {
+          "protocols": ["http", "https"]
+        }
+      }
+    },
+    "packages": [ "git" ]
+  }
 }
