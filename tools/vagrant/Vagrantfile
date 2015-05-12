@@ -77,10 +77,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         end
       end
 
-      chef.environment = chef.json['environment'] if chef.json['environment']
+      if chef.json['environment']
+        chef.environment = chef.json['environment']
 
-      unless chef.environment == 'development'
-        chef.encrypted_data_bag_secret_key_path = "../chef/encrypted_data_bag_secret"
+        unless chef.environment == 'development'
+          chef.encrypted_data_bag_secret_key_path = "../chef/encrypted_data_bag_secret"
+        end
       end
     end
   end
