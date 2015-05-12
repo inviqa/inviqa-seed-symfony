@@ -9,6 +9,11 @@
         "default": {
           "password": "984C42CF342f7j6"
         }
+      },
+      "users": {
+        "{{name}}": {
+          "password": "{{name}}"
+        }
       }
     },
     "ssl_certs": {
