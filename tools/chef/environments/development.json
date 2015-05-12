@@ -7,7 +7,7 @@
   "default_attributes": {
     "nginx": {
       "sites": {
-        "{{hostname}}": {
+        "{{name}}": {
           "server_name": "{{hostname}}",
           "docroot": "/vagrant/public",
           "protocols": ["http", "https"]
