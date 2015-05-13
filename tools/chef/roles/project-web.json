@@ -1,0 +1,33 @@
+{
+  "name": "project-web",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "{{name}} web role",
+  "run_list": [
+    "recipe[data-bag-merge::environment]",
+    "recipe[config-driven-helper::iptables-standard]",
+    "recipe[yum-epel]",
+    "recipe[yum-ius]",
+    "role[db-mysql55]",
+    "role[php56]",
+    "role[web-nginx]",
+    "recipe[config-driven-helper::packages]"
+  ],
+  "default_attributes": {
+    "mysql": {
+      "users": {
+        "{{name}}": {
+          "database_name": "{{name}}"
+        }
+      }
+    },
+    "nginx": {
+      "sites": {
+        "{{name}}": {
+          "protocols": ["http", "https"]
+        }
+      }
+    },
+    "packages": [ "git" ]
+  }
+}
