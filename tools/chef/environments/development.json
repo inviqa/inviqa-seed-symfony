@@ -21,6 +21,15 @@
           "database_name": "{{name}}"
         }
       }
+    },
+
+    "mysql": {
+      "allow_remote_root": true,
+      "bind_address": "0.0.0.0"
+    },
+
+    "iptables-standard": {
+      "allowed_incoming_ports": {"mysql": "mysql"}
     }
   },
 
