@@ -24,6 +24,16 @@
           }
         }
       }
+    },
+    "mysql": {
+      "users": {
+        "{{name}}-qa": {
+          "database_name": "{{name}}-qa"
+        },
+        "{{name}}-uat": {
+          "database_name": "{{name}}-uat"
+        }
+      }
     }
   }
 }
