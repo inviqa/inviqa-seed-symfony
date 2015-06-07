@@ -6,22 +6,13 @@
   "run_list": [
     "recipe[data-bag-merge::environment]",
     "recipe[config-driven-helper::iptables-standard]",
-    "recipe[yum-epel]",
-    "recipe[yum-ius]",
-    "role[db-mysql55]",
+    "role[db-mysql55-client]",
     "role[php56]",
     "role[web-nginx]",
     "recipe[config-driven-helper::capistrano]",
     "recipe[config-driven-helper::packages]"
   ],
   "default_attributes": {
-    "mysql": {
-      "users": {
-        "{{name}}": {
-          "database_name": "{{name}}"
-        }
-      }
-    },
     "nginx": {
       "shared_config": {
         "my-app": {
