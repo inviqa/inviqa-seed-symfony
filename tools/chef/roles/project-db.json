@@ -7,14 +7,5 @@
     "recipe[data-bag-merge::environment]",
     "recipe[config-driven-helper::iptables-standard]",
     "role[db-mysql55-server]"
-  ],
-  "default_attributes": {
-    "mysql": {
-      "users": {
-        "{{name}}": {
-          "database_name": "{{name}}"
-        }
-      }
-    }
-  }
+  ]
 }
