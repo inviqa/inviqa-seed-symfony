@@ -8,10 +8,10 @@
     "recipe[config-driven-helper::iptables-standard]",
     "recipe[yum-epel]",
     "recipe[yum-ius]",
-    "recipe[config-driven-helper::capistrano]",
     "role[db-mysql55]",
     "role[php56]",
     "role[web-nginx]",
+    "recipe[config-driven-helper::capistrano]",
     "recipe[config-driven-helper::packages]"
   ],
   "default_attributes": {

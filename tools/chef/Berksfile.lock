@@ -6,8 +6,8 @@ DEPENDENCIES
     ref: 1.0.5
   config-driven-helper
     git: git://github.com/inviqa/chef-config-driven-helper.git
-    revision: 651512a5dd8935dfbf3c81fc95e2acef3d1639a8
-    ref: 1.3.5
+    revision: fa51300af7f25297df6989dfca56cc715ba4423d
+    ref: 1.3.6
   data-bag-merge (~> 0.2.4)
   elasticsearch (~> 0.3.7)
   jetty
@@ -42,7 +42,7 @@ GRAPH
   ark (0.9.0)
     7-zip (>= 0.0.0)
     windows (>= 0.0.0)
-  aws (2.7.0)
+  aws (2.7.1)
   bluepill (2.3.1)
     rsyslog (>= 0.0.0)
   build-essential (1.4.4)
@@ -52,7 +52,7 @@ GRAPH
     apt (>= 0.0.0)
     yum (>= 0.0.0)
   chef_handler (1.1.6)
-  config-driven-helper (1.3.5)
+  config-driven-helper (1.3.6)
     apache2 (~> 1.8)
     build-essential (~> 1.4)
     chef-solo-search (~> 0.5.1)
