@@ -25,6 +25,9 @@
   },
 
   "override_attributes": {
+    "capistrano": {
+      "group": false
+    },
     "data-bag-merge": {
       "environments": {
         "encrypted": false
