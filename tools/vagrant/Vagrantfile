@@ -20,6 +20,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # vagrant-cachier settings
   config.cache.auto_detect = true
+  
+  # Box configuration
+  config.vm.box = 'inviqa/centos-6-stack-php56'
+  config.vm.box_version = '~> 0.3'
 
   # Virtualbox specific configuration
   config.vm.provider :virtualbox do |vb, overrides|
@@ -33,10 +37,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Network configuration
     overrides.vm.network :private_network, ip: "{{vm_ip}}"
     overrides.ssh.forward_agent = true
-
-    # Box configuration
-    overrides.vm.box = 'CentOS-6.6-stack+php56+nginx-0.2.0'
-    overrides.vm.box_url = 'http://invi.qa/1yPpmmn'
 
     # Shared folders
     mount_options = ["dmode=777", "fmode=777"]
