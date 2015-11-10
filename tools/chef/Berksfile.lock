@@ -4,10 +4,7 @@ DEPENDENCIES
     git: git://github.com/inviqa/chef-varnish.git
     revision: b648abfb373d3cdac67f89d89f14944a265657a0
     ref: 1.0.5
-  config-driven-helper
-    git: git://github.com/inviqa/chef-config-driven-helper.git
-    revision: d806dbf088575ec5ccdb663b6ebb9aef0c9e0cfa
-    ref: 1.4.0
+  config-driven-helper (~> 1.5.0)
   data-bag-merge (~> 0.2.4)
   elasticsearch (~> 0.3.7)
   jetty
@@ -48,22 +45,19 @@ GRAPH
   bluepill (2.3.1)
     rsyslog (>= 0.0.0)
   build-essential (1.4.4)
-  chef-solo-search (0.5.1)
   chef-sugar (2.0.0)
   chef-varnish (1.0.5)
     apt (>= 0.0.0)
     yum (>= 0.0.0)
   chef_handler (1.1.6)
-  config-driven-helper (1.4.0)
+  config-driven-helper (1.5.0)
     apache2 (~> 1.8)
     build-essential (~> 1.4)
-    chef-solo-search (~> 0.5.1)
     database (~> 2.0)
     iptables-ng (~> 2.2.0)
     mysql (~> 4.0)
-    nginx (< 2.5.0)
+    nginx (< 2.4.4)
     ssh_known_hosts (~> 2.0)
-    users (~> 1.7)
   data-bag-merge (0.2.4)
   database (2.0.0)
     aws (>= 0.0.0)
@@ -85,7 +79,7 @@ GRAPH
   iis (2.1.2)
     windows (>= 1.2.6)
   iptables (0.13.2)
-  iptables-ng (2.2.7)
+  iptables-ng (2.2.8)
   java (1.24.0)
   jetty (0.2.0)
     iptables (>= 0.0.0)
@@ -113,7 +107,7 @@ GRAPH
     yum-epel (>= 0.0.0)
   ohai (1.1.12)
   openssl (1.1.0)
-  partial_search (1.0.8)
+  partial_search (1.0.9)
   php (1.3.14)
     build-essential (>= 0.0.0)
     iis (>= 0.0.0)
@@ -147,10 +141,9 @@ GRAPH
   ssh_known_hosts (2.0.0)
     partial_search (>= 0.0.0)
   ulimit (0.3.2)
-  users (1.8.2)
   windows (1.33.1)
     chef_handler (>= 0.0.0)
-  xfs (1.1.0)
+  xfs (1.1.1)
   xml (1.2.6)
     build-essential (>= 0.0.0)
     chef-sugar (>= 0.0.0)
