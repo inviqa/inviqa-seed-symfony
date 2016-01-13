@@ -3,13 +3,12 @@
 require 'ffi'
 
 # Ensure version that supports Atlas integration
-Vagrant.require_version '>= 1.5.0'
+Vagrant.require_version '>= 1.7.0'
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
 # Hobo.vagrant_plugin "vagrant-hostsupdater"
-# Hobo.vagrant_plugin "vagrant-omnibus"
 # Hobo.vagrant_plugin "vagrant-cachier"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -17,9 +16,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # vagrant-hostsupdater settings
   config.vm.hostname = "{{hostname}}"
   # config.hostsupdater.aliases = []
-
-  # vagrant-omnibus settings
-  config.omnibus.chef_version = '11.18.12'
 
   # vagrant-cachier settings
   config.cache.auto_detect = true
@@ -57,6 +53,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :chef_solo do |chef|
     # Do not add site-cookbooks to this
     # Berkshelf will copy any site-cookbooks defined in the Berksfile
+    chef.version = '11.18.12'
+    chef.channel = 'stable'
+
     chef.cookbooks_path = "../chef/cookbooks"
     chef.environments_path = "../chef/environments"
     chef.roles_path = "../chef/roles"
