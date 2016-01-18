@@ -1,11 +1,11 @@
 require 'semantic'
 
-if ::Semantic::Version.new(Hobo::VERSION) < ::Semantic::Version.new('0.0.13')
+unless defined?(Hem) && ::Semantic::Version.new(Hem::VERSION).satisfies('1.0.1-beta6')
   FileUtils.rm_rf Hobo.project_config.project_path
-  raise Hobo::UserError.new "This seed requires at least hobo 0.0.13\n\nPlease upgrade with `gem install hobo-inviqa`"
+  raise Hobo::UserError.new "This seed requires at least hem 1.0.1-beta6\n\nPlease upgrade at https://github.com/inviqa/hem"
 end
 
-# Overwrite hobo README with project README
-old_readme = File.join(Hobo.project_config.project_path, 'README.md')
-new_readme = File.join(Hobo.project_config.project_path, 'README.project.md')
+# Overwrite hem README with project README
+old_readme = File.join(Hem.project_config.project_path, 'README.md')
+new_readme = File.join(Hem.project_config.project_path, 'README.project.md')
 FileUtils.mv new_readme, old_readme
