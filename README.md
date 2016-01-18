@@ -1,8 +1,8 @@
-# Hobo project seed (framework agnostic)
+# Hem project seed (framework agnostic)
 
 This repository contains the common configuration, structure and tooling necessary to kickstart a framework agnostic project in a consistent manner.
 
-It is designed for use with the "hobo seed plant" command and while cloning it directly as a base to start from, you'll be missing out hobo being able to populate some placeholders for you.
+It is designed for use with the "hem seed plant" command and while cloning it directly as a base to start from, you'll be missing out hem being able to populate some placeholders for you.
 
 ## Goals
 
@@ -23,16 +23,10 @@ The folder structure is as follows:
 ## Technologies
 
 - Packer stack+nginx base box
-- Chef 11.8.2 w/ roles for common services
+- Chef 11 w/ roles for common services
 - Capistrano 2 w/ custom helpers
-- Vagrant 1.3+
+- Vagrant 1.7+
 - knife-solo
 - composer
-- nginx
-- php54
-
-## Differences from the old template
-
-- Berkshelf used instead of librarian-chef for speed and circular resolution
-- Common chef service roles included
-- Hobo files no longer present (it's a gem now)
+- nginx (default), apache - available as different Chef roles
+- php54, php55, php56 - available as different Chef roles
