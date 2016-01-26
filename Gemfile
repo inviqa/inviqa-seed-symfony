@@ -10,7 +10,9 @@ gem "capistrano", "~> 2.15.5"
 gem "railsless-deploy", "~> 1.1.2"
 
 # Execution helpers
-gem 'rubygems-bundler', '~> 1.4.3'
+if Bundler.settings[:path].nil?
+  gem 'rubygems-bundler', '~> 1.4.3'
+end
 
 # CI / testing
 gem 'serverspec', '~> 1.9.0'
