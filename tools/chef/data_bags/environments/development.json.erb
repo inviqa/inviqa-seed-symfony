@@ -11,14 +11,14 @@
         }
       },
       "users": {
-        "{{name}}": {
-          "password": "{{name}}"
+        "<%= config.name %>": {
+          "password": "<%= config.name %>"
         }
       }
     },
     "ssl_certs": {
-      "/etc/pki/tls/certs/cert.pem": "{{chef_ssl.cert}}",
-      "/etc/pki/tls/private/key.pem": "{{chef_ssl.key}}"
+      "/etc/pki/tls/certs/cert.pem": <%= JSON.dump(config.chef_ssl[:cert]) %>,
+      "/etc/pki/tls/private/key.pem": <%= JSON.dump(config.chef_ssl[:key]) %>
     }
   }
 }
