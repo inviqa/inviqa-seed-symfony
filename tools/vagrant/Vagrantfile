@@ -21,8 +21,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.cache.auto_detect = true
   
   # Box configuration
-  config.vm.box = 'inviqa/centos-6-stack-php56'
-  config.vm.box_version = '~> 0.3'
+  config.vm.box = 'inviqa/centos-7-stack-php56'
+  config.vm.box_version = '~> 1.0'
 
   # Virtualbox specific configuration
   config.vm.provider :virtualbox do |vb, overrides|
