@@ -27,7 +27,7 @@ DEPENDENCIES
   yum (~> 3.10.0)
   yum-cron (~> 0.1.0)
   yum-epel (~> 0.6.6)
-  yum-ius (~> 0.4.5)
+  yum-percona (~> 0.2.5)
   yum-webtatic (~> 0.6.0)
 
 GRAPH
@@ -158,9 +158,8 @@ GRAPH
   yum-cron (0.1.0)
   yum-epel (0.6.6)
     yum (~> 3.10.0)
-  yum-ius (0.4.5)
+  yum-percona (0.2.5)
     yum (~> 3.2)
-    yum-epel (>= 0.0.0)
   yum-webtatic (0.6.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
