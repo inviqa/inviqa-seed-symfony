@@ -9,7 +9,7 @@
     }
   },
   "run_list": [
-    "recipe[redisio::install]",
+    "recipe[redisio]",
     "recipe[redisio::enable]",
     "recipe[config-driven-helper::services]"
   ]
