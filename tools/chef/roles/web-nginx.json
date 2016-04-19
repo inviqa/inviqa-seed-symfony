@@ -6,7 +6,8 @@
   "default_attributes": {
     "nginx": {
       "package": "nginx18",
-      "default_site_enabled": false
+      "default_site_enabled": false,
+      "https_variable_emulation": false
     },
     "php-fpm": {
       "service_name": "php-fpm",
