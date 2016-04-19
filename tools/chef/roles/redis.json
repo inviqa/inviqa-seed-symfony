@@ -10,7 +10,7 @@
       "safe_install": false,
       "default_settings": {
         "loglevel": "warning",
-        "unixsocket": "/var/run/redis.sock",
+        "unixsocket": "/var/run/redis/master/redis.sock",
         "unixsocketperm": "777"
       },
       "servers": [
