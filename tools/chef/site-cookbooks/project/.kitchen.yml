@@ -6,8 +6,8 @@ provisioner:
   name: chef_solo
 
 platforms:
-  - name: bento/centos-6.7
-  - name: bento/centos-7.2
+  - name: inviqa/centos-6-minimal
+  - name: inviqa/centos-7-minimal
 
 suites:
   - name: default
