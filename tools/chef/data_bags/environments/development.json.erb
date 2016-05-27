@@ -1,0 +1,24 @@
+{
+  "id": "development",
+  "default_attributes": {
+    "mysql": {
+      "server_root_password": <%= JSON.dump(config.tmp.mysql_root_password) %>,
+      "server_repl_password": <%= JSON.dump(config.tmp.mysql_repl_password) %>,
+      "server_debian_password": <%= JSON.dump(config.tmp.mysql_debian_password) %>,
+      "connections": {
+        "default": {
+          "password": <%= JSON.dump(config.tmp.mysql_root_password) %>
+        }
+      },
+      "users": {
+        "<%= config.name %>": {
+          "password": "<%= config.name %>"
+        }
+      }
+    },
+    "ssl_certs": {
+      "/etc/pki/tls/certs/cert.pem": <%= JSON.dump(config.tmp.chef_ssl[:cert]) %>,
+      "/etc/pki/tls/private/key.pem": <%= JSON.dump(config.tmp.chef_ssl[:key]) %>
+    }
+  }
+}
