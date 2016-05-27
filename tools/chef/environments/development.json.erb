@@ -7,9 +7,9 @@
   "default_attributes": {
     "nginx": {
       "sites": {
-        "{{name}}": {
+        "<%= config.name %>": {
           "inherits": "my-app",
-          "server_name": "{{hostname}}",
+          "server_name": "<%= config.hostname %>",
           "docroot": "/vagrant/web",
           "endpoint": "app_dev.php",
           "capistrano": false
@@ -18,8 +18,8 @@
     },
     "mysql": {
       "users": {
-        "{{name}}": {
-          "database_name": "{{name}}"
+        "<%= config.name %>": {
+          "database_name": "<%= config.name %>"
         }
       }
     },

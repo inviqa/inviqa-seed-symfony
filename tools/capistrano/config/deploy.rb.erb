@@ -4,7 +4,7 @@ set :default_stage, "dev"
 require 'capistrano/ext/multistage'
 require 'inviqa_cap/composer'
 
-set :repository, "{{git_url}}"
+set :repository, "<%= config.git_url %>"
 set :scm, :git
 set :user, "deploy"
 set :deploy_via, :remote_cache
