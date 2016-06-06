@@ -12,6 +12,8 @@
         "ssl_offload": {
           "type": "ssl_offload",
           "protocols": ["https"],
+          "disable_default_location_block": true,
+          "php_support": false,
           "locations": {
             "/": {
               "type": "path_not_regex",
