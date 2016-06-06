@@ -5,6 +5,13 @@
   "description": "<%= config.name %> base role",
   "run_list": [
     "recipe[data-bag-merge::environment]",
-    "recipe[config-driven-helper::iptables-standard]"
-  ]
+    "recipe[config-driven-helper::iptables-standard]",
+    "recipe[ntp]",
+    "recipe[system::timezone]"
+  ],
+  "default_attributes": {
+    "system": {
+      "timezone": "UTC"
+    }
+  }
 }
