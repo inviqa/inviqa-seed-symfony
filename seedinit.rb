@@ -14,3 +14,8 @@ password = '984C42CF342f7j6' # password still is set in the basebox
 config.tmp.mysql_root_password = password
 config.tmp.mysql_repl_password = password
 config.tmp.mysql_debian_password = password
+
+config.locate.Berksfile.patterns = ['tools/chef/Berksfile']
+config.locate.Cheffile.patterns = ['tools/chef/Cheffile']
+config.locate.Gemfile.patterns = ['Gemfile']
+config.locate.Vagrantfile.patterns = ['tools/vagrant/Vagrantfile']
