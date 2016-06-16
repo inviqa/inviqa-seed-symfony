@@ -1,17 +1,17 @@
 # General
-*.vagrant
 .bundle
-build/*
-tools/chef/cookbooks/*
-tools/chef/tmp/*
-tools/assets/*
-bin/*
 .DS_Store
+.vagrant
+/build/*
+/tools/chef/cookbooks/*
+/tools/chef/tmp/*
+/tools/assets/*
+/bin/*
 secret.key
 
 # Composer
-vendor
-composer.phar
+/vendor
+/bin/composer.phar
 
 # Frontend
 .sass-cache/*
