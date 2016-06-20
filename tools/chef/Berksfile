@@ -25,6 +25,7 @@ cookbook 'jetty', :github => 'inviqa/chef-jetty', :tag => '0.2'
 cookbook 'solr', :github => 'inviqa/chef-solr', :tag => '1.0.1'
 cookbook 'chef-varnish', :github => 'inviqa/chef-varnish', :ref => '1.0.5'
 cookbook 'config-driven-helper', '~> 2.0'
+cookbook 'iptables-patterns', '~> 0.1.0'
 cookbook 'php-fpm', '~> 0.7.5'
 
 cookbook 'project', :path => 'site-cookbooks/project'

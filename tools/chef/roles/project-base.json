@@ -5,7 +5,8 @@
   "description": "<%= config.name %> base role",
   "run_list": [
     "recipe[data-bag-merge::environment]",
-    "recipe[config-driven-helper::iptables-standard]",
+    "recipe[iptables-patterns::fail2ban]",
+    "recipe[iptables-patterns::frontend_permissive_ports]",
     "recipe[ntp]",
     "recipe[system::timezone]"
   ],

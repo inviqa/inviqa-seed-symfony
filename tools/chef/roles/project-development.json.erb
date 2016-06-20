@@ -11,7 +11,8 @@
     }
   },
   "run_list": [
-    "recipe[config-driven-helper::iptables-standard]",
+    "recipe[iptables-patterns::fail2ban]",
+    "recipe[iptables-patterns::frontend_permissive_ports]",
     "recipe[mailcatcher-ng]",
     "recipe[mailcatcher-ng::postfix]",
     "role[php56-development]"
