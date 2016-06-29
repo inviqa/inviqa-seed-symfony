@@ -4,7 +4,6 @@ source "https://rubygems.org"
 gem "berkshelf", "~> 4.3"
 gem "chef", "~> 12.8"
 gem "knife-solo", "~> 0.5.1"
-gem "knife-solo_data_bag", "~> 1.1.0"
 
 # Capistrano
 gem "capistrano", "~> 2.15"
