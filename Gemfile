@@ -3,8 +3,7 @@ source "https://rubygems.org"
 # Chef
 gem "berkshelf", "~> 4.3"
 gem "chef", "~> 12.8"
-gem "knife-solo", "~> 0.5.1"
-gem "knife-solo_data_bag", "~> 1.1.0"
+gem "knife-solo", "~> 0.6.0"
 
 # Capistrano
 gem "capistrano", "~> 2.15"
@@ -16,4 +15,4 @@ if Bundler.settings[:path].nil?
 end
 
 # CI / testing
-gem 'serverspec', '~> 2.31'
+gem 'serverspec', '~> 2.36'
