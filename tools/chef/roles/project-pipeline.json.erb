@@ -4,8 +4,7 @@
   "json_class": "Chef::Role",
   "description": "<%= config.name %> pipeline role",
   "run_list": [
-    "recipe[yum-cron]",
-    "recipe[iptables-patterns::fail2ban]",
-    "recipe[iptables-patterns::whitelist_ip_ports]"
+    "role[project-base]",
+    "recipe[yum-cron]"
   ]
 }
