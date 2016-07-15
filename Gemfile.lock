@@ -280,7 +280,7 @@ PLATFORMS
 DEPENDENCIES
   berkshelf (~> 4.3)
   capistrano (~> 2.15)
-  chef (~> 12.8, < 12.11)
+  chef (~> 12.10.24)
   chefspec (~> 4.6)
   foodcritic (~> 6.2)
   kitchen-docker (~> 2.3.0)
