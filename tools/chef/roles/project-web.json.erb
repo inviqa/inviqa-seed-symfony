@@ -9,7 +9,7 @@
     "role[php56]",
     "role[web-nginx]",
     "recipe[config-driven-helper::capistrano]",
-    "recipe[config-driven-helper::packages]"
+    "recipe[config-driven-helper::packages-additional]"
   ],
   "default_attributes": {
     "nginx": {
@@ -35,7 +35,9 @@
         }
       }
     },
-    "packages": [ "git" ],
+    "packages-additional": [
+      "git": "install"
+    },
     "php": {
       "directives": {
         "date.timezone": "Europe/London"
