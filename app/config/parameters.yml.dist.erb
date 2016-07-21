@@ -3,9 +3,9 @@ parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
-    database_name:     '{{name}}'
-    database_user:     '{{name}}'
-    database_password: '{{name}}'
+    database_name:     '<%= config.name %>'
+    database_user:     '<%= config.name %>'
+    database_password: '<%= config.name %>'
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
