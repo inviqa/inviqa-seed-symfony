@@ -8,16 +8,16 @@
     },
     "require": {
         "php": ">=5.6.0",
-        "symfony/symfony": "2.6.*",
-        "doctrine/orm": "~2.2,>=2.2.3",
-        "doctrine/doctrine-bundle": "~1.2",
-        "twig/extensions": "~1.0",
-        "symfony/assetic-bundle": "~2.3",
+        "symfony/symfony": "3.1.*",
+        "doctrine/orm": "~2.5",
+        "doctrine/doctrine-bundle": "~1.6",
+        "twig/extensions": "~1.3",
+        "symfony/assetic-bundle": "~2.8",
         "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.4",
-        "sensio/distribution-bundle": "~3.0",
+        "symfony/monolog-bundle": "~2.11",
+        "sensio/distribution-bundle": "~5.0",
         "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.1"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
@@ -36,9 +36,9 @@
         "theseer/fxsl": "1.1.*",
         "phpunit/phpunit": "5.4.*",
         "covex-nn/phpcb": "1.*",
-        "sensio/generator-bundle": "~2.3",
-        "behat/symfony2-extension": "~2.0",
-        "coduo/php-matcher": "~1.0"
+        "sensio/generator-bundle": "~3.0",
+        "behat/symfony2-extension": "~2.1",
+        "coduo/php-matcher": "~2.0"
     },
     "scripts": {
         "post-root-package-install": [
