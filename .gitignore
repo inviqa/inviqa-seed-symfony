@@ -31,10 +31,3 @@ tools/chef/.chef/*encrypted_data_bag_secret
 node_modules/*
 
 # SF2
-/web/bundles/
-/app/bootstrap.php.cache
-/app/cache/*
-/app/config/parameters.yml
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
