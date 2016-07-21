@@ -26,7 +26,18 @@
 
     "mysql": {
       "allow_remote_root": true,
-      "bind_address": "0.0.0.0"
+      "bind_address": "0.0.0.0",
+      "tunable": {
+        "max_connections": "50"
+      }
+    },
+
+    "php-fpm": {
+      "pools": {
+        "www": {
+          "max_spare_servers": "5"
+        }
+      }
     },
 
     "iptables-standard": {
