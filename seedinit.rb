@@ -44,3 +44,4 @@ FileUtils.rm_r 'symfony-standard'
 FileUtils.mv 'seed/parameters.yml.dist.erb', 'app/config/'
 FileUtils.rm 'app/config/parameters.yml.dist'
 FileUtils.rmdir 'seed'
+File.symlink '../bin/console', 'app/console' unless File.exist?('app/console')
