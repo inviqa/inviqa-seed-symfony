@@ -28,14 +28,6 @@
       }
     },
 
-    "php-fpm": {
-      "pools": {
-        "www": {
-          "max_spare_servers": "5"
-        }
-      }
-    },
-
     "iptables-standard": {
       "allowed_incoming_ports": {"mysql": "mysql"}
     },
@@ -51,6 +43,13 @@
     "data-bag-merge": {
       "environments": {
         "encrypted": false
+      }
+    },
+    "php-fpm": {
+      "pools": {
+        "www": {
+          "max_spare_servers": "5"
+        }
       }
     }
   }
