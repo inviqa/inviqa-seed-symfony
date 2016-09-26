@@ -19,7 +19,8 @@
               "type": "path_not_regex",
               "mode": "reverse-proxy",
               "proxy": {
-                "location": "http://127.0.0.1"
+                "location": "http://127.0.0.1",
+                "preserve_host": true
               }
             }
           }
