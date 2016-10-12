@@ -19,6 +19,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # vagrant-cachier settings
   config.cache.auto_detect = true
+
+  # Mount settings
+  nfs_version = 3
+  nfs_version = 4 if FFI::Platform::IS_LINUX
+  mount_options = { mount_options: ["dmode=777", "fmode=777"] }
+  mount_options = { nfs: true, nfs_version: nfs_version, nfs_udp: false } unless FFI::Platform::IS_WINDOWS
   
   # Box configuration
   config.vm.box = 'inviqa/centos-7-stack-php56'
@@ -35,17 +41,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     overrides.ssh.forward_agent = true
 
     # Shared folders
-    mount_options = ["dmode=777", "fmode=777"]
-    opts = if FFI::Platform::IS_WINDOWS
-      { :mount_options => mount_options }
-    else
-      { :nfs => mount_options }
-    end
-
     overrides.vm.synced_folder(
       "../../",
       "/vagrant",
-      opts
+      mount_options
     )
   end
 
