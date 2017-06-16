@@ -5,6 +5,8 @@ variables:
     name: CP_ENVIRONMENT
     expression: '"<%= config.name %>" ~ code_reference.branch'
   CP_ENVIRONMENT_DOMAIN_SUFFIX: -<%= config.name %>.webpipeline.net
+  ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
+  ASSETS_ENV: ''
 
 pipelines:
   - name: Production
@@ -23,6 +25,8 @@ pipelines:
       - migration
       - deployment
     condition: '"Ready for review" in pull_request.labels'
+    variables:
+      ASSESTS_ENV: development
   - name: Remote Development
     tasks:
       - web_image
@@ -32,6 +36,7 @@ pipelines:
       - deployment
     variables:
       DEVELOPMENT_MODE: 0
+      ASSESTS_ENV: development
     condition: 'code_reference.branch matches "#^cpdev/#"'
 
 defaults:
@@ -45,6 +50,14 @@ tasks:
       environment:
         - name: GITHUB_TOKEN
           value: ${GITHUB_TOKEN}
+        - name: AWS_ACCESS_KEY_ID
+          value: ${AWS_ACCESS_KEY_ID}
+        - name: AWS_SECRET_ACCESS_KEY
+          value: ${AWS_SECRET_ACCESS_KEY}
+        - name: ASSETS_S3_BUCKET
+          value: ${ASSETS_S3_BUCKET}
+        - name: ASSETS_ENV
+          value: ${ASSETS_ENV}
 
     services:
       web:
@@ -125,6 +138,11 @@ tasks:
         - container migrate
 
       environment_variables: &WEB_ENV_VARS
+        AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+        AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+        ASSETS_S3_BUCKET: ${ASSETS_S3_BUCKET}
+        ASSETS_ENV: ${ASSETS_ENV}
+        ASSETS_FILES_ENABLED: false
         APP_USER_LOCAL: false
         DATABASE_NAME: ${DATABASE_NAME}
         DATABASE_USER: ${DATABASE_USER}
