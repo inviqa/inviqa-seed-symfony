@@ -1,21 +1,34 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
-    database_driver:   pdo_mysql
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     '<%= config.name %>'
-    database_user:     '<%= config.name %>'
-    database_password: '<%= config.name %>'
-    # You should uncomment this if you want use pdo_sqlite
-    # database_path: "%kernel.root_dir%/data.db3"
+    env(DATABASE_URL): '%env(DATABASE_PLATFORM)%://%env(DATABASE_USER)%:%env(DATABASE_PASSWORD)%@%env(DATABASE_HOST)%:%env(DATABASE_PORT)%/%env(DATABASE_NAME)%?charset=utf8mb4&serverVersion=%env(DATABASE_VERSION)%'
+    env(DATABASE_PLATFORM): mysql
+    env(DATABASE_HOST): 127.0.0.1
+    env(DATABASE_PORT): 3306
+    env(DATABASE_NAME): '<%= config.name %>'
+    env(DATABASE_USER): '<%= config.name %>'
+    env(DATABASE_PASSWORD): '<%= config.name %>'
 
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
+    env(MAILER_URL): '%env(MAILER_TRANSPORT)%:%env(MAILER_HOST)%'
+    env(MAILER_TRANSPORT): 'sendmail'
+    env(MAILER_HOST): ~
+
+    env(APP_SECRET): ThisTokenIsNotSoSecretChangeIt
+
+    #legacy variables
+    database_driver:   pdo_mysql
+    database_host:     '%env(DATABASE_HOST)%'
+    database_port:     '%env(DATABASE_PORT)%'
+    database_name:     '%env(DATABASE_NAME)%'
+    database_user:     '%env(DATABASE_USER)%'
+    database_password: '%env(DATABASE_PASSWORD)%'
+
+    mailer_transport:  '%env(MAILER_TRANSPORT)%'
+    mailer_host:       '%env(MAILER_HOST)%'
     mailer_user:       ~
     mailer_password:   ~
 
     locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            '%env(APP_SECRET)%'
 
     debug_toolbar:          true
     debug_redirects:        false
