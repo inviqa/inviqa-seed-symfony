@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   mount_options = { nfs: true, nfs_version: nfs_version, nfs_udp: false } unless FFI::Platform::IS_WINDOWS
 
   # Box configuration
-  config.vm.box = 'inviqa/centos-7-stack-php56'
+  config.vm.box = 'inviqa/centos-7-stack-php70'
   config.vm.box_version = '~> 1.2'
 
   # vagrant-cachier settings
