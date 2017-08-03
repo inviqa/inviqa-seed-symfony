@@ -1,7 +1,11 @@
 version: '3'
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        DEVELOPMENT_MODE: 'true'
+        RUN_BUILD: 'false'
     depends_on:
       - mysql
     environment:
@@ -14,6 +18,7 @@ services:
       DATABASE_USER: <%= config.name %>
       DATABASE_PASSWORD: <%= config.name %>
       DATABASE_HOST: mysql
+      RUN_BUILD: # get from host env
     expose:
       - 80
       - 443
