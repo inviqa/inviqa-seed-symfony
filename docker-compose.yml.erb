@@ -6,6 +6,7 @@ services:
       args:
         DEVELOPMENT_MODE: 'true'
         RUN_BUILD: 'false'
+        SYMFONY_ENV: 'dev'
     depends_on:
       - mysql
     environment:

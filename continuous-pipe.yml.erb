@@ -8,6 +8,7 @@ variables:
   ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
   ASSETS_ENV: ''
   DEVELOPMENT_MODE: 'false'
+  SYMFONY_ENV: prod
 
 pipelines:
   - name: Production
@@ -38,6 +39,7 @@ pipelines:
     variables:
       DEVELOPMENT_MODE: 'true'
       ASSESTS_ENV: development
+      SYMFONY_ENV: dev
     condition: 'code_reference.branch matches "#^cpdev/#"'
 
 defaults:
@@ -63,6 +65,8 @@ tasks:
           value: ${DEVELOPMENT_MODE}
         - name: RUN_BUILD
           value: 'true'
+        - name: SYMFONY_ENV
+          value: ${SYMFONY_ENV}
 
     services:
       web:
@@ -157,6 +161,7 @@ tasks:
         AUTH_HTTP_HTPASSWD: ${AUTH_HTTP_HTPASSWD}
         AUTH_IP_WHITELIST_ENABLED: true
         AUTH_HTTP_WHITELIST_IPS: ${AUTH_HTTP_WHITELIST_IPS}
+        SYMFONY_ENV: ${SYMFONY_ENV}
         TRUSTED_REVERSE_PROXIES: ${TRUSTED_REVERSE_PROXIES}
 
   deployment:
