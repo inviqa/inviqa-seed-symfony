@@ -7,6 +7,7 @@ variables:
   CP_ENVIRONMENT_DOMAIN_SUFFIX: -<%= config.name %>.webpipeline.net
   ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
   ASSETS_ENV: ''
+  DEVELOPMENT_MODE: 'false'
 
 pipelines:
   - name: Production
@@ -35,7 +36,7 @@ pipelines:
       - migration
       - deployment
     variables:
-      DEVELOPMENT_MODE: 0
+      DEVELOPMENT_MODE: 'true'
       ASSESTS_ENV: development
     condition: 'code_reference.branch matches "#^cpdev/#"'
 
@@ -58,6 +59,10 @@ tasks:
           value: ${ASSETS_S3_BUCKET}
         - name: ASSETS_ENV
           value: ${ASSETS_ENV}
+        - name: DEVELOPMENT_MODE
+          value: ${DEVELOPMENT_MODE}
+        - name: RUN_BUILD
+          value: 'true'
 
     services:
       web:
@@ -147,6 +152,7 @@ tasks:
         DATABASE_NAME: ${DATABASE_NAME}
         DATABASE_USER: ${DATABASE_USER}
         DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+        DEVELOPMENT_MODE: ${DEVELOPMENT_MODE}
         AUTH_HTTP_ENABLED: true
         AUTH_HTTP_HTPASSWD: ${AUTH_HTTP_HTPASSWD}
         AUTH_IP_WHITELIST_ENABLED: true
