@@ -26,11 +26,11 @@ symfony_seed = Hem::Lib::Seed::Seed.new(
 )
 symfony_seed.update
 
-versions = symfony_seed.tags.reverse
+versions = symfony_seed.tags.map { |version| Gem::Version.new(version.sub(/^v/,'')) }
 
 symfony_seed.export File.join(config.project_path, 'symfony-standard'),
     :name => "symfony-standard",
-    :ref => versions.first
+    :ref => versions.sort { |x, y| x <=> y }.last.to_s
 
 FileUtils.mv Dir.glob('symfony-standard/*').select {|f| File.directory? f}, config.project_path
 File.open('.gitignore', 'a') do |gitignore|
