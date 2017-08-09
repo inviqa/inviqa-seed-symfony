@@ -11,33 +11,23 @@ variables:
 
 pipelines:
   - name: Production
-    tasks:
+    tasks: &standard_tasks
       - web_image
-      - storage
+      - infrastructure
       - reserve_ip
       - migration
       - deployment
     condition: 'code_reference.branch in ["develop", "qa", "staging", "production"]'
   - name: Pull Requests
-    tasks:
-      - web_image
-      - storage
-      - reserve_ip
-      - migration
-      - deployment
+    tasks: *standard_tasks
     condition: '"Ready for review" in pull_request.labels'
     variables:
-      ASSESTS_ENV: development
+      ASSETS_ENV: development
   - name: Remote Development
-    tasks:
-      - web_image
-      - storage
-      - reserve_ip
-      - migration
-      - deployment
+    tasks: *standard_tasks
     variables:
       DEVELOPMENT_MODE: 'true'
-      ASSESTS_ENV: development
+      ASSETS_ENV: development
     condition: 'code_reference.branch matches "#^cpdev/#"'
 
 defaults:
@@ -68,7 +58,7 @@ tasks:
       web:
         image: quay.io/organisation/<%= config.name %>
 
-  storage:
+  infrastructure:
     deploy:
       services:
         mysql:
@@ -106,8 +96,56 @@ tasks:
               MYSQL_DATABASE: ${DATABASE_NAME}
               MYSQL_USER: ${DATABASE_USER}
 
+          deployment_strategy:
+            readiness_probe:
+              type: tcp
+              port: 3306
+
+        mailcatcher:
+          specification:
+            accessibility:
+              from_cluster: true
+              from_external: false
+
+            resources:
+              limits:
+                cpu: 50m
+                memory: 1Gi
+
+          deployment_strategy:
+            readiness_probe:
+              type: tcp
+              port: 1025
+
+        tideways:
+          specification:
+            resources:
+              limits:
+                cpu: 50m
+                memory: 100Mi
+
+          deployment_strategy:
+            readiness_probe:
+              type: tcp
+              port: 9135
+
+        sshforward:
+          condition: 'code_reference.branch matches "#^cpdev/#"'
+          specification:
+            ports:
+              - 9000
+            environment_variables:
+              SSH_FORWARD_PASSWORD: ${SSH_FORWARD_PASSWORD}
+
+          deployment_strategy:
+            readiness_probe:
+              type: tcp
+              port: 22
+
   reserve_ip:
     deploy:
+      filter:
+        expression: 'tasks.infrastructure.services.mysql.created'
       services:
         web:
           endpoints:
@@ -131,41 +169,31 @@ tasks:
               - 80
               - 443
 
-      filter:
-        expression: 'tasks.storage.services.mysql.created'
-
-  migration:
-    run:
-      image:
-        from_service: web
-
-      commands:
-        - container migrate
-
-      environment_variables: &WEB_ENV_VARS
-        AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-        AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-        ASSETS_S3_BUCKET: ${ASSETS_S3_BUCKET}
-        ASSETS_ENV: ${ASSETS_ENV}
-        ASSETS_FILES_ENABLED: false
-        APP_USER_LOCAL: false
-        DATABASE_NAME: ${DATABASE_NAME}
-        DATABASE_USER: ${DATABASE_USER}
-        DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-        DEVELOPMENT_MODE: ${DEVELOPMENT_MODE}
-        AUTH_HTTP_ENABLED: true
-        AUTH_HTTP_HTPASSWD: ${AUTH_HTTP_HTPASSWD}
-        AUTH_IP_WHITELIST_ENABLED: true
-        AUTH_HTTP_WHITELIST_IPS: ${AUTH_HTTP_WHITELIST_IPS}
-        TRUSTED_REVERSE_PROXIES: ${TRUSTED_REVERSE_PROXIES}
+          deployment_strategy:
+            readiness_probe:
+              type: tcp
+              port: 80
 
   deployment:
     deploy:
       services:
         web:
           specification:
-            environment_variables:
-              <<: *WEB_ENV_VARS
+            environment_variables: &WEB_ENV_VARS
+              AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+              AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+              ASSETS_S3_BUCKET: ${ASSETS_S3_BUCKET}
+              ASSETS_ENV: ''
+              APP_USER_LOCAL: false
+              DATABASE_NAME: ${DATABASE_NAME}
+              DATABASE_USER: ${DATABASE_USER}
+              DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+              DEVELOPMENT_MODE: ${DEVELOPMENT_MODE}
+              AUTH_HTTP_ENABLED: true
+              AUTH_HTTP_HTPASSWD: ${AUTH_HTTP_HTPASSWD}
+              AUTH_IP_WHITELIST_ENABLED: true
+              AUTH_IP_WHITELIST: ${AUTH_IP_WHITELIST}
+              TRUSTED_REVERSE_PROXIES: ${TRUSTED_REVERSE_PROXIES}
 
             resources:
               requests:
@@ -220,3 +248,16 @@ tasks:
               limits:
                 cpu: 1
                 memory: 1G
+
+  migration:
+    run:
+      image:
+        from_service: web
+
+      commands:
+        - container setup
+        - container migrate
+
+      environment_variables:
+        <<: *WEB_ENV_VARS
+        ASSETS_ENV: ${ASSETS_ENV}

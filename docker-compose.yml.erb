@@ -8,6 +8,10 @@ services:
         RUN_BUILD: 'false'
     depends_on:
       - mysql
+      - sshforward
+      - tideways
+    env_file:
+      - ./docker.env
     environment:
       ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
       ASSETS_ENV: development
@@ -18,6 +22,8 @@ services:
       DATABASE_USER: <%= config.name %>
       DATABASE_PASSWORD: <%= config.name %>
       DATABASE_HOST: mysql
+      XDEBUG_REMOTE_ENABLED: 'false'
+      TIDEWAYS_ENABLED: 'true'
       RUN_BUILD: # get from host env
     expose:
       - 80
@@ -25,8 +31,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    volumes:
-      - .:/app
 
   mysql:
     image: quay.io/continuouspipe/mysql5.7:stable
@@ -35,3 +39,26 @@ services:
       MYSQL_DATABASE: <%= config.name %>
       MYSQL_USER: <%= config.name %>
       MYSQL_PASSWORD: <%= config.name %>
+
+  mailcatcher:
+    image: quay.io/continuouspipe/mailcatcher:stable
+    extra_hosts:
+      - "mailcatcher:127.0.0.1"
+    expose:
+      - 1080
+    ports:
+      - "1080:1080"
+
+  tideways:
+    image: quay.io/continuouspipe/tideways:stable
+    expose:
+      - 9135
+
+  sshforward:
+    image: quay.io/continuouspipe/ssh-forward:stable
+    environment:
+      SSH_FORWARD_PASSWORD: xd3bug
+    expose:
+      - 9000
+    ports:
+      - "2222:22"
