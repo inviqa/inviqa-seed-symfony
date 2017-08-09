@@ -32,6 +32,8 @@ You should also install dockrsync from [dockrsync](https://github.com/webtatic/d
 3. Copy `docker-compose.override.yml.dist` to `docker-compose.override.yml`
 4. Fill in docker.env's secrets - do not commit this file!
    - TIDEWAYS_API_KEY can be found in LastPass
+   - AWS_ACCESS_KEY_ID is found in your Hem configuration. Check `~/.hem/config.yaml` and `~/.hobo/config.yaml`.
+   - AWS_SECRET_ACCESS_KEY should be found wherever AWS_ACCESS_KEY_ID was.
 5. Run the following:
    - for bash/zsh: `eval "$(echo $(printf "%s " $(cat docker.env)) docker-compose build)"`
    - for fish: `eval env (echo (printf "'%s' " (cat docker.env)) docker-compose build)`
