@@ -29,19 +29,20 @@ You should also install dockrsync from [dockrsync](https://github.com/webtatic/d
    - The anybar question can be skipped over by hitting enter.
    - We recommend choosing "yes" for the delete flag question.
 2. Copy docker.env.dist to docker.env
-3. Fill in docker.env's secrets - do not commit this file!
+3. Copy `docker-compose.override.yml.dist` to `docker-compose.override.yml`
+4. Fill in docker.env's secrets - do not commit this file!
    - TIDEWAYS_API_KEY can be found in LastPass
-4. Run the following:
+5. Run the following:
    - for bash/zsh: `eval "$(echo $(printf "%s " $(cat docker.env)) docker-compose build)"`
    - for fish: `eval env (echo (printf "'%s' " (cat docker.env)) docker-compose build)`
-5. Run `docker-compose up -d`
-6. Wait for the build to finish, you can follow along with `docker-compose logs -f web`
-7. Run `docker-compose exec web bash` to log in to your local "web" container.
-8. Run this to let you see the site from a nice domain:
+6. Run `docker-compose up -d`
+7. Wait for the build to finish, you can follow along with `docker-compose logs -f web`
+8. Run `docker-compose exec web bash` to log in to your local "web" container.
+9. Run this to let you see the site from a nice domain:
     - On Linux/OSX: `echo "127.0.0.1 <%= config.hostname %>" | sudo tee -a /etc/hosts`
     - On Windows, open up `C:\Windows\system32\etc\HOSTS` in your favourite text editor as admin and add `127.0.0.1 <%= config.hostname %>`
-9. Run `dockrsync watch` to watch for changes to your local filesystem and upload them to the web container.
-10. The site will be available at [https://<%= config.hostname %>](https://<%= config.hostname %>). Happy coding!
+10. Run `dockrsync watch` to watch for changes to your local filesystem and upload them to the web container.
+11. The site will be available at [https://<%= config.hostname %>](https://<%= config.hostname %>). Happy coding!
 
 
 #### Dockrsync useful commands
@@ -51,12 +52,11 @@ Run `dockrsync fetch` to synchronise your local filesystem with the one in the c
 
 
 #### Speed up startup time and customise parameters for your environment
-1. Copy `docker-compose.override.yml.dist` to `docker-compose.override.yml`
-2. Change the variables that you want to in the `docker-compose.override.yml`
+1. Change the variables that you want to in the `docker-compose.override.yml`
    - `RUN_BUILD` being `false` will stop the build from running each time you bring up the web container.
    - `XDEBUG_REMOTE_ENABLED` can be turned on to allow Xdebug to connect and debug the site. We recommend to turn off Tideways when Xdebug is on.
    - `TIDEWAYS_ENABLED` can be turned off to allow Xdebug to not pick up `tideways.php` as the entry point for the application.
-3. Stop and start your environment: `docker-compose stop; docker-compose up -d`
+2. Stop and start your environment: `docker-compose stop; docker-compose up -d`
 
 #### XDebug Setup
 1. Set `XDEBUG_REMOTE_ENABLED` to `true` and `TIDEWAYS_ENABLED` to `false` in `docker-compose.override.yml`, after copying it from `docker-compose.override.yml.dist` if you haven't already

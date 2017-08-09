@@ -29,9 +29,10 @@ services:
     expose:
       - 80
       - 443
-    ports:
-      - "80:80"
-      - "443:443"
+    # Please define ports in your docker-compose.override.yml
+    # ports:
+    #  - '80:80'
+    #  - '443:443'
 
   mysql:
     image: quay.io/continuouspipe/mysql5.7:stable
@@ -44,11 +45,12 @@ services:
   mailcatcher:
     image: quay.io/continuouspipe/mailcatcher:stable
     extra_hosts:
-      - "mailcatcher:127.0.0.1"
+      - 'mailcatcher:127.0.0.1'
     expose:
       - 1080
-    ports:
-      - "1080:1080"
+    # Please define ports in your docker-compose.override.yml
+    # ports:
+    #  - '1080:1080'
 
   tideways:
     image: quay.io/continuouspipe/tideways:stable
@@ -61,5 +63,6 @@ services:
       SSH_FORWARD_PASSWORD: xd3bug
     expose:
       - 9000
-    ports:
-      - "2222:22"
+    # Please define ports in your docker-compose.override.yml
+    # ports:
+    #  - '2222:22'
