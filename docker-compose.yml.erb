@@ -21,6 +21,8 @@ services:
       DATABASE_USER: <%= config.name %>
       DATABASE_PASSWORD: <%= config.name %>
       DATABASE_HOST: mysql
+      SENDMAIL_RELAY_HOST: 'mailcatcher'
+      SENDMAIL_RELAY_PORT: 1025
       XDEBUG_REMOTE_ENABLED: 'false'
       TIDEWAYS_ENABLED: 'true'
       RUN_BUILD: # get from host env
@@ -45,6 +47,7 @@ services:
     extra_hosts:
       - 'mailcatcher:127.0.0.1'
     expose:
+      - 1025
       - 1080
     # Please define ports in your docker-compose.override.yml
     # ports:
