@@ -9,6 +9,7 @@ services:
     depends_on:
       - mysql
       - sshforward
+      - mailcatcher
       - tideways
     env_file:
       - ./docker.env
