@@ -143,9 +143,9 @@ tasks:
               port: 22
 
   reserve_ip:
+    filter:
+      expression: 'tasks.infrastructure.services.mysql.created'
     deploy:
-      filter:
-        expression: 'tasks.infrastructure.services.mysql.created'
       services:
         web:
           endpoints:
@@ -194,6 +194,7 @@ tasks:
               AUTH_IP_WHITELIST_ENABLED: true
               AUTH_IP_WHITELIST: ${AUTH_IP_WHITELIST}
               TRUSTED_REVERSE_PROXIES: ${TRUSTED_REVERSE_PROXIES}
+              TIDEWAYS_API_KEY: ${TIDEWAYS_API_KEY}
 
             resources:
               requests:

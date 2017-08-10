@@ -4,6 +4,7 @@ services:
     build:
       context: .
       args:
+        ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
         DEVELOPMENT_MODE: 'true'
         RUN_BUILD: 'false'
     depends_on:
