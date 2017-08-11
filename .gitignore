@@ -27,3 +27,7 @@
 .sass-cache/*
 *.css.map
 node_modules/*
+
+# Docker
+/docker-compose.override.yml
+/docker.env
