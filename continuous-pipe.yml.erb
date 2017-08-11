@@ -54,9 +54,9 @@ tasks:
         - name: RUN_BUILD
           value: 'true'
 
-    services:
-      web:
-        image: quay.io/organisation/<%= config.name %>
+      services:
+        web:
+          image: quay.io/organisation/<%= config.name %>
 
   infrastructure:
     deploy:
