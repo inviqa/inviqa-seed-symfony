@@ -1,4 +1,5 @@
 variables:
+  DATABASE_HOST: mysql
   DATABASE_NAME: <%= config.name %>
   DATABASE_USER: <%= config.name %>
   CP_ENVIRONMENT:
@@ -185,6 +186,7 @@ tasks:
               ASSETS_S3_BUCKET: ${ASSETS_S3_BUCKET}
               ASSETS_ENV: ''
               APP_USER_LOCAL: false
+              DATABASE_HOST: ${DATABASE_HOST}
               DATABASE_NAME: ${DATABASE_NAME}
               DATABASE_USER: ${DATABASE_USER}
               DATABASE_PASSWORD: ${DATABASE_PASSWORD}
