@@ -149,7 +149,7 @@ tasks:
     deploy:
       services:
         web:
-          endpoints:
+          endpoints: &WEB_ENDPOINTS
             - name: web
               cloud_flare_zone:
                 zone_identifier: ${CLOUD_FLARE_ZONE}
@@ -179,6 +179,8 @@ tasks:
     deploy:
       services:
         web:
+          endpoints: *WEB_ENDPOINTS
+
           specification:
             environment_variables: &WEB_ENV_VARS
               AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
