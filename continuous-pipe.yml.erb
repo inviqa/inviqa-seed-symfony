@@ -107,6 +107,9 @@ tasks:
             accessibility:
               from_cluster: true
               from_external: false
+            ports:
+              - 1025
+              - 1080
 
             resources:
               limits:
@@ -124,6 +127,8 @@ tasks:
               limits:
                 cpu: 50m
                 memory: 100Mi
+            ports:
+              - 9135
 
           deployment_strategy:
             readiness_probe:
