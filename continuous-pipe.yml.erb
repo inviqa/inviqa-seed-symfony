@@ -6,6 +6,9 @@ variables:
     name: CP_ENVIRONMENT
     expression: '"<%= config.name %>" ~ code_reference.branch'
   CP_ENVIRONMENT_DOMAIN_SUFFIX: -<%= config.name %>.webpipeline.net
+  SENDMAIL_RELAY_HOST:
+    name: SENDMAIL_RELAY_HOST
+    expression: '"mailcatcher.<%= config.name %>-" ~ slugify(code_reference.branch) ~ ".svc.cluster.local"'
   ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
   ASSETS_ENV: ''
   DEVELOPMENT_MODE: 'false'
@@ -204,6 +207,7 @@ tasks:
               AUTH_IP_WHITELIST: ${AUTH_IP_WHITELIST}
               TRUSTED_REVERSE_PROXIES: ${TRUSTED_REVERSE_PROXIES}
               TIDEWAYS_API_KEY: ${TIDEWAYS_API_KEY}
+              SENDMAIL_RELAY_HOST: ${SENDMAIL_RELAY_HOST}
 
             resources:
               requests:
