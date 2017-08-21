@@ -4,7 +4,7 @@ variables:
   DATABASE_USER: <%= config.name %>
   CP_ENVIRONMENT:
     name: CP_ENVIRONMENT
-    expression: '"<%= config.name %>" ~ code_reference.branch'
+    expression: '"<%= config.name %>-" ~ code_reference.branch'
   CP_ENVIRONMENT_DOMAIN_SUFFIX: -<%= config.name %>.webpipeline.net
   SENDMAIL_RELAY_HOST:
     name: SENDMAIL_RELAY_HOST
