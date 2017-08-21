@@ -43,20 +43,13 @@ tasks:
   web_image:
     build:
       environment:
-        - name: GITHUB_TOKEN
-          value: ${GITHUB_TOKEN?:}
-        - name: AWS_ACCESS_KEY_ID
-          value: ${AWS_ACCESS_KEY_ID?:}
-        - name: AWS_SECRET_ACCESS_KEY
-          value: ${AWS_SECRET_ACCESS_KEY?:}
-        - name: ASSETS_S3_BUCKET
-          value: ${ASSETS_S3_BUCKET}
-        - name: ASSETS_ENV
-          value: ${ASSETS_ENV}
-        - name: DEVELOPMENT_MODE
-          value: ${DEVELOPMENT_MODE}
-        - name: RUN_BUILD
-          value: 'true'
+        GITHUB_TOKEN: ${GITHUB_TOKEN?:}
+        AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID?:}
+        AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY?:}
+        ASSETS_S3_BUCKET: ${ASSETS_S3_BUCKET}
+        ASSETS_ENV: ${ASSETS_ENV}
+        DEVELOPMENT_MODE: ${DEVELOPMENT_MODE}
+        RUN_BUILD: 'true'
 
       services:
         web:
