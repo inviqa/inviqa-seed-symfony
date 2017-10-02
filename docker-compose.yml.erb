@@ -27,9 +27,14 @@ services:
       XDEBUG_REMOTE_ENABLED: 'false'
       TIDEWAYS_ENABLED: 'true'
       RUN_BUILD: # get from host env
+      WEB_DIRECTORY: public
     expose:
       - 80
       - 443
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--insecure", "https://localhost/"]
+      interval: 2m
+      retries: 1
     # Please define ports in your docker-compose.override.yml
     # ports:
     #  - '80:80'
@@ -50,6 +55,10 @@ services:
     expose:
       - 1025
       - 1080
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:1080/"]
+      interval: 2m
+      retries: 1
     # Please define ports in your docker-compose.override.yml
     # ports:
     #  - '1080:1080'
