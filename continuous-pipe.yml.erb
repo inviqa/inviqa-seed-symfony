@@ -1,10 +1,14 @@
 variables:
+  DATABASE_HOST: mysql
   DATABASE_NAME: <%= config.name %>
   DATABASE_USER: <%= config.name %>
   CP_ENVIRONMENT:
     name: CP_ENVIRONMENT
-    expression: '"<%= config.name %>" ~ code_reference.branch'
+    expression: '"<%= config.name %>-" ~ code_reference.branch'
   CP_ENVIRONMENT_DOMAIN_SUFFIX: -<%= config.name %>.webpipeline.net
+  SENDMAIL_RELAY_HOST:
+    name: SENDMAIL_RELAY_HOST
+    expression: '"mailcatcher.<%= config.name %>-" ~ slugify(code_reference.branch) ~ ".svc.cluster.local"'
   ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
   ASSETS_ENV: ''
   DEVELOPMENT_MODE: 'false'
@@ -12,33 +16,23 @@ variables:
 
 pipelines:
   - name: Production
-    tasks:
+    tasks: &standard_tasks
       - web_image
-      - storage
+      - infrastructure
       - reserve_ip
       - migration
       - deployment
     condition: 'code_reference.branch in ["develop", "qa", "staging", "production"]'
   - name: Pull Requests
-    tasks:
-      - web_image
-      - storage
-      - reserve_ip
-      - migration
-      - deployment
+    tasks: *standard_tasks
     condition: '"Ready for review" in pull_request.labels'
     variables:
-      ASSESTS_ENV: development
+      ASSETS_ENV: development
   - name: Remote Development
-    tasks:
-      - web_image
-      - storage
-      - reserve_ip
-      - migration
-      - deployment
+    tasks: *standard_tasks
     variables:
       DEVELOPMENT_MODE: 'true'
-      ASSESTS_ENV: development
+      ASSETS_ENV: development
       SYMFONY_ENV: dev
     condition: 'code_reference.branch matches "#^cpdev/#"'
 
@@ -51,28 +45,20 @@ tasks:
   web_image:
     build:
       environment:
-        - name: GITHUB_TOKEN
-          value: ${GITHUB_TOKEN}
-        - name: AWS_ACCESS_KEY_ID
-          value: ${AWS_ACCESS_KEY_ID}
-        - name: AWS_SECRET_ACCESS_KEY
-          value: ${AWS_SECRET_ACCESS_KEY}
-        - name: ASSETS_S3_BUCKET
-          value: ${ASSETS_S3_BUCKET}
-        - name: ASSETS_ENV
-          value: ${ASSETS_ENV}
-        - name: DEVELOPMENT_MODE
-          value: ${DEVELOPMENT_MODE}
-        - name: RUN_BUILD
-          value: 'true'
-        - name: SYMFONY_ENV
-          value: ${SYMFONY_ENV}
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+        AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+        AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+        ASSETS_S3_BUCKET: ${ASSETS_S3_BUCKET}
+        ASSETS_ENV: ${ASSETS_ENV}
+        DEVELOPMENT_MODE: ${DEVELOPMENT_MODE}
+        RUN_BUILD: 'true'
+        SYMFONY_ENV: ${SYMFONY_ENV}
 
     services:
       web:
         image: quay.io/organisation/<%= config.name %>
 
-  storage:
+  infrastructure:
     deploy:
       services:
         mysql:
@@ -105,22 +91,75 @@ tasks:
                 memory: 2Gi
 
             environment_variables:
-              MYSQL_PASSWORD: ${DATABASE_PASSWORD}
-              MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+              MYSQL_PASSWORD: ${DATABASE_PASSWORD?:}
+              MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD?:}
               MYSQL_DATABASE: ${DATABASE_NAME}
               MYSQL_USER: ${DATABASE_USER}
 
+          deployment_strategy:
+            readiness_probe:
+              type: tcp
+              port: 3306
+
+        mailcatcher:
+          specification:
+            accessibility:
+              from_cluster: true
+              from_external: false
+            ports:
+              - 1025
+              - 1080
+
+            resources:
+              limits:
+                cpu: 50m
+                memory: 1Gi
+
+          deployment_strategy:
+            readiness_probe:
+              type: tcp
+              port: 1025
+
+        tideways:
+          specification:
+            resources:
+              limits:
+                cpu: 50m
+                memory: 100Mi
+            ports:
+              - 9135
+
+          deployment_strategy:
+            readiness_probe:
+              type: tcp
+              port: 9135
+
+        sshforward:
+          condition: 'code_reference.branch matches "#^cpdev/#"'
+          specification:
+            ports:
+              - 9000
+            environment_variables:
+              SSH_FORWARD_PASSWORD: ${SSH_FORWARD_PASSWORD?:}
+
+          deployment_strategy:
+            readiness_probe:
+              type: tcp
+              port: 22
+
   reserve_ip:
+    filter:
+      expression: 'tasks.infrastructure.services.mysql.created'
     deploy:
       services:
         web:
-          endpoints:
+          endpoints: &WEB_ENDPOINTS
             - name: web
               cloud_flare_zone:
-                zone_identifier: ${CLOUD_FLARE_ZONE}
+                zone_identifier: ${CLOUD_FLARE_ZONE?:}
                 authentication:
-                    email: ${CLOUD_FLARE_EMAIL}
-                    api_key: ${CLOUD_FLARE_API_KEY}
+                    email: ${CLOUD_FLARE_EMAIL?:}
+                    api_key: ${CLOUD_FLARE_API_KEY?:}
                 proxied: true
                 record_suffix: ${CP_ENVIRONMENT_DOMAIN_SUFFIX}
               ingress:
@@ -135,42 +174,37 @@ tasks:
               - 80
               - 443
 
-      filter:
-        expression: 'tasks.storage.services.mysql.created'
-
-  migration:
-    run:
-      image:
-        from_service: web
-
-      commands:
-        - container migrate
-
-      environment_variables: &WEB_ENV_VARS
-        AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-        AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-        ASSETS_S3_BUCKET: ${ASSETS_S3_BUCKET}
-        ASSETS_ENV: ${ASSETS_ENV}
-        ASSETS_FILES_ENABLED: false
-        APP_USER_LOCAL: false
-        DATABASE_NAME: ${DATABASE_NAME}
-        DATABASE_USER: ${DATABASE_USER}
-        DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-        DEVELOPMENT_MODE: ${DEVELOPMENT_MODE}
-        AUTH_HTTP_ENABLED: true
-        AUTH_HTTP_HTPASSWD: ${AUTH_HTTP_HTPASSWD}
-        AUTH_IP_WHITELIST_ENABLED: true
-        AUTH_HTTP_WHITELIST_IPS: ${AUTH_HTTP_WHITELIST_IPS}
-        SYMFONY_ENV: ${SYMFONY_ENV}
-        TRUSTED_REVERSE_PROXIES: ${TRUSTED_REVERSE_PROXIES}
+          deployment_strategy:
+            readiness_probe:
+              type: tcp
+              port: 80
 
   deployment:
     deploy:
       services:
         web:
+          endpoints: *WEB_ENDPOINTS
+
           specification:
-            environment_variables:
-              <<: *WEB_ENV_VARS
+            environment_variables: &WEB_ENV_VARS
+              AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID?:}
+              AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY?:}
+              ASSETS_S3_BUCKET: ${ASSETS_S3_BUCKET}
+              ASSETS_ENV: ''
+              APP_USER_LOCAL: false
+              DATABASE_HOST: ${DATABASE_HOST}
+              DATABASE_NAME: ${DATABASE_NAME}
+              DATABASE_USER: ${DATABASE_USER}
+              DATABASE_PASSWORD: ${DATABASE_PASSWORD?:}
+              DEVELOPMENT_MODE: ${DEVELOPMENT_MODE}
+              AUTH_HTTP_ENABLED: true
+              AUTH_HTTP_HTPASSWD: ${AUTH_HTTP_HTPASSWD?:}
+              AUTH_IP_WHITELIST_ENABLED: true
+              AUTH_IP_WHITELIST: ${AUTH_IP_WHITELIST?:}
+              TRUSTED_REVERSE_PROXIES: ${TRUSTED_REVERSE_PROXIES?:}
+              SYMFONY_ENV: ${SYMFONY_ENV}
+              TIDEWAYS_API_KEY: ${TIDEWAYS_API_KEY?:}
+              SENDMAIL_RELAY_HOST: ${SENDMAIL_RELAY_HOST}
 
             resources:
               requests:
@@ -225,3 +259,16 @@ tasks:
               limits:
                 cpu: 1
                 memory: 1G
+
+  migration:
+    run:
+      image:
+        from_service: web
+
+      commands:
+        - container migrate
+
+      environment_variables:
+        <<: *WEB_ENV_VARS
+        ASSETS_ENV: ${ASSETS_ENV}
+        ASSETS_FILES_ENABLED: 'false'

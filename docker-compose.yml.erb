@@ -4,30 +4,43 @@ services:
     build:
       context: .
       args:
+        ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
         DEVELOPMENT_MODE: 'true'
         RUN_BUILD: 'false'
         SYMFONY_ENV: 'dev'
     depends_on:
       - mysql
+      - sshforward
+      - mailcatcher
+      - tideways
+    env_file:
+      - ./docker.env
     environment:
       ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
       ASSETS_ENV: development
       ASSETS_CLEANUP: 'false'
-      AWS_ACCESS_KEY_ID:
-      AWS_SECRET_ACCESS_KEY:
       DATABASE_NAME: <%= config.name %>
       DATABASE_USER: <%= config.name %>
       DATABASE_PASSWORD: <%= config.name %>
       DATABASE_HOST: mysql
+      SENDMAIL_RELAY_HOST: 'mailcatcher'
+      SENDMAIL_RELAY_PORT: 1025
+      XDEBUG_REMOTE_ENABLED: 'false'
+      TIDEWAYS_ENABLED: 'true'
       RUN_BUILD: # get from host env
+      WEB_DIRECTORY: public
+      AUTH_HTTP_HEALTHCHECK_LOCATION: '/status/healthcheck'
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--header", "--insecure", "https://localhost/status/healthcheck"]
+      interval: 10s
+      retries: 12
     expose:
       - 80
       - 443
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - .:/app
+    # Please define ports in your docker-compose.override.yml
+    # ports:
+    #  - '80:80'
+    #  - '443:443'
 
   mysql:
     image: quay.io/continuouspipe/mysql5.7:stable
@@ -36,3 +49,33 @@ services:
       MYSQL_DATABASE: <%= config.name %>
       MYSQL_USER: <%= config.name %>
       MYSQL_PASSWORD: <%= config.name %>
+
+  mailcatcher:
+    image: quay.io/continuouspipe/mailcatcher:stable
+    extra_hosts:
+      - 'mailcatcher:127.0.0.1'
+    expose:
+      - 1025
+      - 1080
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:1080/"]
+      interval: 2m
+      retries: 1
+    # Please define ports in your docker-compose.override.yml
+    # ports:
+    #  - '1080:1080'
+
+  tideways:
+    image: quay.io/continuouspipe/tideways:stable
+    expose:
+      - 9135
+
+  sshforward:
+    image: quay.io/continuouspipe/ssh-forward:stable
+    environment:
+      SSH_FORWARD_PASSWORD: xd3bug
+    expose:
+      - 9000
+    # Please define ports in your docker-compose.override.yml
+    # ports:
+    #  - '2222:22'

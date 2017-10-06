@@ -28,4 +28,8 @@
 *.css.map
 node_modules/*
 
-# SF2
+# Docker
+/docker-compose.override.yml
+/docker.env
+
+# Symfony
