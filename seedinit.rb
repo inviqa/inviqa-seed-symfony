@@ -34,11 +34,11 @@ Dir.chdir File.join(Hem.seed_cache_path, "symfony-standard") do
   tags = `git tag`.split("\n")
 end
 
-versions = tags.map { |version| Gem::Version.new(version.sub(/^v/,'')) }
+versions = tags.map { |tag| {tag: tag, version: Gem::Version.new(tag.sub(/^v/,''))} }
 
 symfony_seed.export File.join(config.project_path, 'symfony-standard'),
     :name => "symfony-standard",
-    :ref => versions.sort { |x, y| x <=> y }.last.to_s
+    :ref => versions.sort { |x, y| x[:version] <=> y[:version] }.last[:tag]
 
 FileUtils.mv Dir.glob('symfony-standard/*').select {|f| File.directory? f}, config.project_path
 File.open('.gitignore', 'a') do |gitignore|
