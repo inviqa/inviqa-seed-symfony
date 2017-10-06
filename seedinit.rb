@@ -29,7 +29,8 @@ symfony_seed = Hem::Lib::Seed::Seed.new(
 )
 symfony_seed.update
 
-versions = symfony_seed.tags.map { |version| Gem::Version.new(version.sub(/^v/,'')) }
+
+versions = symfony_seed.tags.delete_if {|x| x == 'v2.6.'}.map { |version| Gem::Version.new(version.sub(/^v/,'')) }
 
 symfony_seed.export File.join(config.project_path, 'symfony-standard'),
     :name => "symfony-standard",
