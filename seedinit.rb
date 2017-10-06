@@ -29,8 +29,12 @@ symfony_seed = Hem::Lib::Seed::Seed.new(
 )
 symfony_seed.update
 
+tags = []
+Dir.chdir File.join(Hem.seed_cache_path, "symfony-standard") do
+  tags = `git tag`.split("\n")
+end
 
-versions = symfony_seed.tags.delete_if {|x| x == 'v2.6.'}.map { |version| Gem::Version.new(version.sub(/^v/,'')) }
+versions = tags.map { |version| Gem::Version.new(version.sub(/^v/,'')) }
 
 symfony_seed.export File.join(config.project_path, 'symfony-standard'),
     :name => "symfony-standard",
