@@ -14,7 +14,7 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Plant seed') {
             steps {
                 checkout scm
 
@@ -33,14 +33,54 @@ pipeline {
                 sh 'hem seed plant "$(basename "${PLANTED_PATH}")" "--seed=${WORKSPACE}" --branch=ci-test --non-interactive'
 
                 dir(env.PLANTED_PATH) {
-                    sh 'eval "$(ssh-agent)" && ssh-add && hem vm rebuild'
-                    sh 'hem exec bash -c \'cd tools/vagrant && rake\''
+                    sh 'hem deps gems'
+                }
+            }
+            post {
+                failure {
+                    dir(env.PLANTED_PATH) {
+                        deleteDir()
+                    }
+                }
+            }
+        }
+        stage('Provision dev environments') {
+            parallel {
+                stage('Vagrant') {
+                    steps {
+                        dir(env.PLANTED_PATH) {
+                            sh 'eval "$(ssh-agent)" && ssh-add && hem vm rebuild'
+                            sh 'hem exec bash -c \'cd tools/vagrant && rake\''
+                        }
+                    }
+                    post {
+                        always {
+                            dir(env.PLANTED_PATH) {
+                                sh 'hem vm destroy'
+                            }
+                        }
+                    }
+                }
+                stage('Docker Compose') {
+                    steps {
+                        dir(env.PLANTED_PATH) {
+                            sh 'sed -i -e \'/^\\s*ASSETS_S3_BUCKET/d\' docker-compose.yml'
+                            sh 'touch docker.env'
+                            sh 'hem exec bash -c \'rake docker:up\''
+                        }
+                    }
+                    post {
+                        always {
+                            dir(env.PLANTED_PATH) {
+                                sh 'docker-compose down -v'
+                            }
+                        }
+                    }
                 }
             }
             post {
                 always {
                     dir(env.PLANTED_PATH) {
-                        sh 'hem vm destroy'
                         deleteDir()
                     }
                 }
