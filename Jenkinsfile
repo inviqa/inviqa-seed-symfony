@@ -9,6 +9,10 @@ pipeline {
         cron cron_string
     }
 
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
+    }
+
     stages {
         stage('Build') {
             steps {
