@@ -61,7 +61,7 @@ pipeline {
                         }
                     }
                 }
-                stage('Docker Compose') {
+                stage('Docker Compose (stable tags)') {
                     steps {
                         dir(env.PLANTED_PATH) {
                             sh 'sed -i -e \'/^\\s*ASSETS_S3_BUCKET/d\' docker-compose.yml'
@@ -72,6 +72,29 @@ pipeline {
                     post {
                         always {
                             dir(env.PLANTED_PATH) {
+                                sh 'docker-compose down -v'
+                            }
+                        }
+                    }
+                }
+                stage('Docker Compose (latest tags)') {
+                    steps {
+                        script {
+                            env.PLANTED_PATH_LATEST = sh(returnStdout: true, script: 'mktemp -d -p "${WORKSPACE}" seed-test-XXXXX').trim()
+                        }
+
+                        sh 'rm -rf "$PLANTED_PATH_LATEST" && cp -r "$PLANTED_PATH" "$PLANTED_PATH_LATEST"'
+
+                        dir(env.PLANTED_PATH_LATEST) {
+                            sh 'sed -i -e \'/^\\s*ASSETS_S3_BUCKET/d\' -e \'s/^\\(\\s*image:\\s*quay.io\\/continuouspipe\\/.*:\\)stable\\s*$/\\1latest/\' docker-compose.yml'
+                            sh 'sed -i -e \'s/^\\(\\s*image:\\s*quay.io\\/continuouspipe\\/.*:\\)stable\\s*$/\\1latest/\' Dockerfile'
+                            sh 'touch docker.env'
+                            sh 'hem exec bash -c \'rake docker:up\''
+                        }
+                    }
+                    post {
+                        always {
+                            dir(env.PLANTED_PATH_LATEST) {
                                 sh 'docker-compose down -v'
                             }
                         }
