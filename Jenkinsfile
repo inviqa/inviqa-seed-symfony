@@ -96,6 +96,7 @@ pipeline {
                         always {
                             dir(env.PLANTED_PATH_LATEST) {
                                 sh 'docker-compose down -v'
+                                deleteDir()
                             }
                         }
                     }
