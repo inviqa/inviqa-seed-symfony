@@ -7,6 +7,7 @@
     "apache": {
       "default_site_enabled": false,
       "default_modules": [
+        "mod_filter",
         "mod_php5",
         "mod_rewrite",
         "mod_ssl",
