@@ -14,7 +14,7 @@ services:
       DEVELOPMENT_MODE: 'true'
       RUN_BUILD: # get from host env
     volumes:
-      - tools/assets:/app/tools/assets
+      - ./tools/assets:/app/tools/assets
 
   mysql:
     ports:
