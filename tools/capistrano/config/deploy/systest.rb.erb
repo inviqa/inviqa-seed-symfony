@@ -1,4 +1,4 @@
-set :deploy_to, "/var/www/" + "systest_domain"
+set :deploy_to, "/var/www/<%= config.name %>-systest"
 set :branch, "develop"
 set :keep_releases, 5
 

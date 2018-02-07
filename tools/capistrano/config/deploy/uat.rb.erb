@@ -1,4 +1,4 @@
-set :deploy_to, "/var/www/" + "uat_domain"
+set :deploy_to, "/var/www/<%= config.name %>-uat"
 set :branch, "develop"
 set :keep_releases, 5
 
