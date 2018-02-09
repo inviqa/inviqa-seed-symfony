@@ -19,6 +19,12 @@
           "port": "6379"
         }
       ]
+    },
+    "yum": {
+      "ius-archive": {
+        "enabled": true,
+        "managed": true
+      }
     }
   },
   "run_list": [
