@@ -3,7 +3,7 @@ source "https://rubygems.org"
 group :docker do
   gem 'rake-tasks-docker', '~> 0.2.0'
   gem 'rake-tasks-docker-setup', '~> 0.1.0'
-  gem 'rake-tasks-docker-sync', '~> 0.2.0'
+  gem 'rake-tasks-docker-sync', '~> 1.0.0'
 end
 
 group :chef do
