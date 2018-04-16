@@ -29,8 +29,18 @@ git clone <%= config.git_url %>
 ##### Docker
 
 - A working docker setup
-  - On MacOS, use [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
+  - On MacOS, use [Docker for Mac](https://docs.docker.com/docker-for-mac/install/).
   - On Linux, add the official Docker repository and install the "docker-ce" package.
+- Ruby 2.2 if you want to use the rake tasks.
+- On MacOS, if you wish to use [docker-sync](https://github.com/EugenMayer/docker-sync) for near-native file access speed run:
+  ```bash
+  gem install docker-sync
+  ```
+  You should also add:
+  ```
+  export RAKE_USE_DOCKER_SYNC=true
+  ```
+  to your `~/.bash_profile`
 
 #### Setup
 
@@ -54,13 +64,14 @@ rake docker:setup
 docker-compose up -d
 ```
 
-or you can use the rake-tasks-docker helper to setup and up in one go via:
+or you can use the rake-tasks-docker helper to perform a setup and up in one go via:
 
 ```bash
 bundle install
 
 rake docker:up
 ```
+The `rake docker:up` task will automatically start up `docker-sync` if you are using that.
 
 Once the environment is running, you should be able to browse to the site at
 [https://<%= config.hostname %>](https://<%= config.hostname %>)
