@@ -93,7 +93,7 @@ def mount_options
   nfs_version = 3
   nfs_version = 4 if FFI::Platform::IS_LINUX
   protocol = 'udp'
-  protocol = 'tcp' if nfs_version == 4 || is_high_sierra
+  protocol = 'tcp' if nfs_version == 4 || is_high_sierra_or_newer
   mount_options = { mount_options: ["dmode=777", "fmode=777"] }
   mount_options = {
     type: :nfs,
@@ -103,8 +103,7 @@ def mount_options
   mount_options
 end
 
-def is_high_sierra
+def is_high_sierra_or_newer
   return false unless FFI::Platform::IS_MAC
-  system("sw_vers | grep -q '10\.13'")
-  return $?.to_i > 0
+  return Gem::Dependency.new('', '~> 10.13').match?('', `sw_vers -productVersion`)
 end
