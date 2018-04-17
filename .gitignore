@@ -29,6 +29,7 @@
 node_modules/*
 
 # Docker
+/.docker-sync
 /docker-compose.override.yml
 /docker.env
 
